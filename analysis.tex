@@ -7,12 +7,22 @@ similarities of predecessor sets of two configurations of a SyDS.
 The first result shows that there are SyDSs such that 
 if a pair of distinct configurations is $h$-close, then 
 any pair of their predecessors is also $h$-close.
-Recall that for any configuration \calc, \predset{\calc}{}
+The second result shows that there are SyDSs such that 
+there is a pair of distinct configurations that is $1$-close, but 
+have predecessors which have the maximum level of dissimilarity
+(i.e., the Hamming distance these predecessor configurations
+is $n$, the number of nodes).
+In addition, we observe the existence of SyDSs in which there 
+are pairs of configurations which have the maximum level 
+of dissimilarity but their predecessors are 1-close. 
+These results point out that SyDSs may exhibit 
+extreme levels of behavior.
+Throughout this section, the reader should bear in mind that
+for any configuration \calc, \predset{\calc}{}
 denotes the set of all predecessors of \calc.
 
-
 \begin{proposition}\label{pro:close-close}
-For integers $n$ and $h$, where $n \geq 1$ and $1 \leq h \leq n$,
+For all integers $n$ and $h$, where $n \geq 1$ and $1 \leq h \leq n$,
 there is a SyDS $\cals_1${} with $n$
 nodes satisfying both of the following properties: 
 (i) every configuration has a predecessor and (ii) 
@@ -37,10 +47,10 @@ to which $v$ has an edge in $G$.
 In such a SyDS, it can be seen that successor of each configuration \calc{}
 is \calc{} itself; that is, each configuration is a fixed point. \QED
 
-Our next result shows that there are SyDSs for which 
-there is a pair of distinct configurations is $1$-close, but
-their predecessors are highly dissimilar; that is, they have 
-the maximum possible Hamming distance.
+%% Our next result shows that there are SyDSs for which 
+%% there is a pair of distinct configurations is $1$-close, but
+%% their predecessors are highly dissimilar; that is, they have 
+%% the maximum possible Hamming distance.
 
 \begin{proposition}\label{pro:close-far}
 For any integer $n \geq 1$,
@@ -56,7 +66,7 @@ $\minsep\left( \predset{\calcone},~ \predset{\calctwo} \right)$ ~=~ $n$.
 \textbf{Proof:} \textcolor{red}{(To be checked.)}
 
 Consider the following SyDS $\cals_2$.
-The underlying graph $G(V,E)$ is a simple cycle on $n$ nodes.
+The underlying graph $G(V,E)$ is a simple path on $n$ nodes.
 Choose any node of $G$, and call this node $x$ the {\em key node}. For
 every other node $v$, choose any neighbor $w$ of $v$ that is closer to the
 key node than $v$. Call this node $w$ the {\em key neighbor} of $v$.
@@ -84,3 +94,12 @@ From the induction hypotheses, $\calcone'$ and $\calctwo'$ differ on $u$.
 Since \calcone{} and \calctwo{} have the same value of $v$, 
 but their predecessors have different values of $u$, 
 $\calcone'$ and $\calctwo'$ have different values of $v$. \QED
+
+\begin{proposition}\label{pro:close-far}
+For any integer $n \geq 1$,
+there is a SyDS $\cals_3${} with $n$
+nodes satisfying both of the following properties: 
+(i) there is a pair of configurations
+\calcone{} and \calctwo{} that have a Hamming distance of $n$  and 
+(ii) $\maxsep\left( \predset{\calcone},~ \predset{\calctwo} \right)$ ~=~ $1$.
+\end{proposition}

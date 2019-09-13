@@ -183,11 +183,13 @@ analogous to minimum separation, is defined as follows.
                             \calh[\calc, \calcp]}{|S_1| \times |S_2|}}.
 \]
 \end{description}
-Among the above measures, \maxsep{} can be seen to provide 
-a stronger guarantee of similarity.
-This is because if \maxsep($S_1$, $S_2$) = $\alpha$, then the Hamming distance
+Among the above measures, \maxsep{} provides the 
+strongest guarantee of similarity.
+This is because if \maxsep($S_1$, $S_2$) = $\alpha$, and $\alpha$ is small,
+then the Hamming distance
 between any pair configurations \calc{} and \calcp, where \calc{} $\in S_1$
-and \calcp{} $\in S_2$, is at most $\alpha$.
+and \calcp{} $\in S_2$, is at most $\alpha$; in other words, 
+each such configuration pair is $\alpha$-close.
 
 \smallskip
 
