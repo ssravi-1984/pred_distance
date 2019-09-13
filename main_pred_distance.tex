@@ -1,0 +1,219 @@
+% Paper on generalized predecessors for Complex Networks 2018
+
+%%%%%%%%%%%%%%%%%%%% author.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample root file for your "contribution" to a contributed volume
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%% Springer %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{svproc}
+
+% RECOMMENDED %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% to typeset URLs, URIs, and DOIs
+\usepackage{url}
+\def\UrlFont{\rmfamily}
+
+% choose options for [] as required from the list
+% in the Reference Guide
+
+\usepackage{mathptmx}       % selects Times Roman as basic font
+\usepackage{helvet}         % selects Helvetica as sans-serif font
+\usepackage{courier}        % selects Courier as typewriter font
+\usepackage{type1cm}        % activate if the above 3 fonts are
+                            % not available on your system
+%
+\usepackage{makeidx}         % allows index generation
+\usepackage{graphicx}        % standard LaTeX graphics tool
+                             % when including figure files
+\usepackage{multicol}        % used for the two-column index
+\usepackage[bottom]{footmisc}% places footnotes at page bottom
+
+% see the list of further useful packages
+% in the Reference Guide
+
+%%%%%% Packages and environments that we need for the paper. %%%%%%
+
+\usepackage[ruled,linesnumbered]{algorithm2e}
+\usepackage{enumitem} %\begin{itemize}[leftmargin=*]
+
+\usepackage{tikz}
+%\usepackage{times}  
+\usepackage{color}  
+\usepackage{wrapfig}  
+%\usepackage{subfig}
+
+\usepackage{cite}
+\usepackage{amsmath, amssymb} 
+%% \usepackage{amsthm}  -- Can't use this.
+\usepackage{mathtools}
+\usepackage{multirow}
+%\usepackage{wrapfig}
+
+\iffalse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+                \node[shape=circle,draw,inner sep=.5pt] (char) {\small #1};}}
+
+\DeclareMathOperator*{\errlh}{\mathrm{err}_v^{0}}
+\DeclareMathOperator*{\errhl}{\mathrm{err}_v^{1}}
+\DeclareMathOperator*{\expect}{\mathbb{E}}
+\DeclareMathOperator*{\argmax}{\arg\max}
+\DeclareMathOperator*{\err}{\mathrm{err}}
+\DeclareMathOperator*{\errv}{\mathrm{err}_v}
+\DeclareMathOperator*{\errk}{\mathbf{err}}
+
+\newcommand{\comment}[1]{{\color{red}(AA: #1)}}
+
+
+\iffalse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% For making subject index -- Needed for the Complex Networks conference.
+
+\makeindex             % used for the subject index
+                       % please use the style svind.ist with
+\makeindex             % used for the subject index
+                       % please use the style svind.ist with
+                       % your makeindex program
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+
+\title{Evolution~of~Similar~Configurations in~Graph~Dynamical~Systems:
+Analytical~and~Experimental~Results}
+\titlerunning{Evolution of Similar Configurations} 
+% Use \titlerunning{Short Title} for an abbreviated version of
+% your contribution title if the original one is too long
+\authorrunning{Priest~et~al.}
+
+\author{Joshua D. Priest
+       \and {~}Madhav V. Marathe 
+       \and  {~}S. S. Ravi
+        \and {\newline} Daniel J. Rosenkrantz 
+        \and {~}Richard E. Stearns %%{\vspace*{-1.7in}}
+}
+\institute{Joshua D. Priest: University of Virginia.
+           \email{jdp8jb@virginia.edu}. \and
+           Madhav V. Marathe: University of Virginia. 
+            \email{marathe@virginia.edu}.  \and
+           S. S. Ravi, Daniel J. Rosenkrantz, Richard E. Stearns: 
+           University of Virginia and University at Albany -- SUNY.~
+           \email{\{ssravi0,~drosenkrantz,~thestearns2\}@gmail.com}.~
+}
+
+\begin{document}
+\maketitle
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \graphicspath{{./figs/}}
+
+
+\newcommand{\cnp}{\textbf{NP}}
+\newcommand{\aacomment}[1]{{\textcolor{magenta}{(AA: #1)}}}
+\newcommand{\sr}{\lambda_{\max}}
+\newcommand{\QED}{\hfill\rule{2mm}{2mm}}
+
+\newcommand{\classp}{\textbf{P}}
+\newcommand{\classnp}{\textbf{NP}}
+
+\newcommand{\npc}{\textbf{NP}-complete}
+\newcommand{\nph}{\textbf{NP}-hard}
+\newcommand{\peqnp}{\mbox{\textbf{P} $=$ \textbf{NP}}}
+\newcommand{\pneqnp}{\mbox{\textbf{P} $\neq$ \textbf{NP}}}
+\newcommand{\opti}{\mbox{\textrm{OPT}$(I)$}}
+
+\newcommand{\algt}{\mbox{$\mathcal{A}_T$}}
+\newcommand{\algb}{\mbox{$\mathcal{A}_B$}}
+
+\newcommand{\calc}{\mbox{$\mathcal{C}$}}
+\newcommand{\calcp}{\mbox{$\mathcal{C'}$}}
+\newcommand{\tclass}{\mathbb{T}_G}
+\newcommand{\tvect}{T}
+\newcommand{\dist}{\mathcal{D}}
+\newcommand{\trans}{\mathcal{F}}
+
+\newcommand{\cals}{\mbox{$\mathcal{S}$}}
+\newcommand{\phasesp}{\mbox{$\mathbb{P}_{\mathcal{S}}$}}
+
+\newcommand{\bbb}{\mbox{$\mathbb{B}$}}
+
+\newcommand{\calcone}{\mbox{$\mathcal{C}_{1}$}}
+\newcommand{\calctwo}{\mbox{$\mathcal{C}_{2}$}}
+
+\newcommand{\calco}{\mbox{$\mathcal{C}_{1}$}}
+\newcommand{\calcz}{\mbox{$\mathcal{C}_0$}}
+\newcommand{\calci}{\mbox{$\mathcal{C}_i$}}
+\newcommand{\calcipo}{\mbox{$\mathcal{C}_{i+1}$}}
+\newcommand{\calct}{\mbox{$\mathcal{C}_{t}$}}
+\newcommand{\calctmo}{\mbox{$\mathcal{C}_{t-1}$}}
+\newcommand{\dcare}{\texttt{x}}
+
+\newcommand{\calh}{\mbox{$\mathbb{H}$}}
+
+\newcommand{\genprob}{\mbox{\textsc{CSC}}}
+
+%% Notation for predecessor set.
+\newcommand{\predset}[1]{\mbox{$\Pi(#1)$}}
+
+%%%%%%%%%%% End of packages and environments needed. %%%%%%%%%%%
+
+%% \maketitle
+% Include a short abstract here (100-300 words):
+%%\abstract{
+\input{abstract}
+%%}
+
+%%\vspace*{-0.25in}
+
+\input{intro}                 %%% Introduction.
+
+\input{preliminaries}         %%% Preliminaries.
+
+\input{analysis}               %%% Analytical Results 
+
+\input{experiments}            %%% Experimental results.
+
+\input{conclusions}            %%% Conclusions and future work.
+
+\iffalse
+%%%%%
+\noindent
+\textbf{Acknowledgments:}~
+We thank Professors Arun Phadke and late Jim Thorp for discussions related to problems studied in this paper.
+This work has been partially supported by
+DARPA Cooperative Agreement D17AC00003 (NGS2),
+DTRA CNIMS (Contract HDTRA1-11-D-0016-0001),
+NSF DIBBS Grant ACI-1443054, 
+NSF BIG DATA Grant IIS-1633028 and
+NSF EAGER Grant CMMI-1745207.
+%The U.S. Government is authorized to reproduce and
+%distribute reprints for Governmental purposes notwithstanding
+%any copyright annotation thereon.
+%%%%%%%
+\fi
+
+%%\vspace*{-.30in}
+
+\bibliographystyle{splncs03}
+%% \bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}

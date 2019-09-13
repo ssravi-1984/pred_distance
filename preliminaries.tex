@@ -1,0 +1,212 @@
+%%\vspace*{-.30in}
+\section{Preliminaries}
+\label{sec:prelim}
+
+%%\vspace*{-.22in}
+\textbf{Synchronous Dynamical Systems and Local Functions.}~
+We follow the presentation in \cite{BH+07} to discuss
+the basic definitions associated with discrete dynamical systems.
+Let \bbb{} denote the Boolean domain \{0,1\}.
+A \textbf{Synchronous Dynamical System} (SyDS)
+\cals{} over \bbb{} is specified as
+a pair ${\cal S}  = (G, {\cal F})$, where 
+(a)~ $G(V,E)$, an undirected graph with $|V| = n$, 
+represents the underlying graph of the SyDS,
+with node set~$V$ and edge set~$E$, and 
+(b)~ ${\cal F} = \{f_1, f_2, \ldots, f_n \}$ is a collection of
+functions in the system, with
+$f_i$ denoting the \textbf{local function} 
+associated with node $v_i$, $1 \leq i \leq n$.
+Each node of $G$ has a state value from \bbb. 
+Each function $f_i$ specifies the local interaction
+between node $v_i$ and its neighbors in $G$.
+The inputs to function $f_i$ are the state of $v_i$ and
+those of the neighbors of $v_i$ in $G$; function $f_i$ maps 
+each combination of inputs to a value in \bbb.
+This value becomes the next state of node $v_i$. 
+It is assumed that each local function can be computed efficiently.
+%% We will provide examples of local functions shortly.
+
+%%\medskip
+At any time $\tau$, 
+the {\bf configuration} \calc{} of a SyDS 
+is the $n$-vector $(s_1^{\tau}, s_2^{\tau}, \ldots, s_n^{\tau})$,
+where $s_i^{\tau} \in \bbb$ is the state of
+node $v_i$ at time $\tau$ ($1 \leq i \leq n$).
+Given a configuration \calc, the state of a node $v$ in \calc{}
+is denoted by $\calc(v)$.
+In a SyDS, all nodes compute and update their next state  
+\emph{synchronously}.
+Other update disciplines (e.g., sequential updates) 
+have also been considered in the literature (e.g., \cite{BH+07}).
+Suppose a given SyDS transitions in one step from
+a configuration \calcp{} to a configuration \calc.
+Then we say that \calc{} is the \textbf{successor} of \calcp,
+and \calcp{} is a \textbf{predecessor} of \calc.
+Since the SyDSs considered in this paper are deterministic,
+each configuration has a unique successor.
+However, a configuration may have zero
+or more predecessors.
+In the graph dynamical systems literature, configurations with 
+no predecessors are called \textbf{Garden of Eden}
+(GE) configurations \cite{MR-2007}.
+SyDSs have been considered in the literature under many 
+classes of local interaction functions 
+(see e.g., \cite{BH+11,Kawachi-et-al-2017}).
+We now present an an example of a SyDS where the local function
+at each node is a \textbf{threshold function}. 
+For each integer $k \geq 0$, the $k$-\textbf{threshold function} has the
+value 1 iff at at least $k$ of its inputs are 1.
+
+\smallskip
+
+%%
+\noindent
+\textbf{Example:}~
+The underlying graph of a SyDS shown in
+Figure~\ref{fig:syds-example}.
+The threshold value for each node is shown within parentheses. 
+(Thus, the local function at $v_2$ is the 2-threshold function
+while that at $v_3$ is the 3-threshold function.)
+Suppose the initial configuration of the system is $(1, 1, 0, 0, 0)$;
+that is,
+$v_1$ and $v_2$ are in state 1 while 
+$v_3$, $v_4$ and $v_5$ are in state 0. 
+At time 1, the state of $v_3$ changes to 1 (since its threshold is 1
+and the state of its neighbor $v_2$ is 1) while
+the other nodes retain their state values.
+At time 2, the state of $v_4$ changes to 1 
+while the other nodes retain their state values.
+At time 3, the state of $v_5$ also changes to 1,
+and the system reaches the configuration $(1, 1, 1, 1, 1)$.
+No further state changes occur in subsequent time steps;
+that is, the configuration $(1, 1, 1, 1, 1)$ is a \textbf{fixed point}.
+
+\smallskip
+
+%%
+\begin{wrapfigure}[16]{l}{0.35\textwidth}
+\centering
+\input{syds_example.pdf_t}
+\caption{\small{An Example of a SyDS where each node has a
+threshold function. The threshold values are shown in parentheses.}}
+\label{fig:syds-example}
+\smallskip
+\end{wrapfigure}
+
+\smallskip
+
+\noindent
+\textbf{Additional Terminology.}~ Here, we introduce some additional
+graph theoretic and Boolean function terminology that will be used 
+throughout the paper. 
+Given a graph $G(V,E)$ and a node $v \in V$, the \textbf{closed neighborhood}
+of $v$, denoted by $N[v]$, consists of $v$ and all its neighbors.
+%% The definitions of \emph{tree decomposition} and
+%% \emph{treewidth} are standard; they can found in
+%% many references (e.g., \cite{Bod97}).
+%% We also need the definition of symmetric and $r$-symmetric Boolean functions;
+%% these definitions are from \cite{Crama-Hammer-2011} 
+%% and \cite{BH+07} respectively.
+%% \begin{definition}\label{def:sym_funct}
+A \textbf{symmetric} Boolean function \cite{Crama-Hammer-2011}  is one whose
+value does not depend on the order in
+which the input bits are specified;
+that is, the function value depends only on how many
+of its inputs are 1.
+A Boolean function $f$ is \textbf{$r$-symmetric} \cite{BH+07}
+if the inputs to $f$ can be partitioned into at most $r$ classes
+such that the value of $f$ depends only on how many of the
+inputs in each of the $r$ classes are 1.
+%% \end{definition}
+Note that any Boolean function with $d$ inputs is $d$-symmetric.
+We will be mainly concerned with $r$-symmetric functions 
+where $r$ is a \emph{fixed} integer.
+%% We say that a \underline{SyDS is $r$-symmetric}
+%% if each of its local functions is $r'$-symmetric 
+%% for some $r' \leq r$.
+
+\smallskip
+
+\noindent
+\textbf{Hamming Distance and Similarity of Configurations.}~
+Given two configurations \calcone{} and \calctwo{} of a SyDS
+over the domain $\{0,1\}$,
+the \textbf{Hamming Distance} between \calcone{} and \calctwo, 
+denoted by \calh[\calcone, \calctwo], is
+the number of positions in which they differ.
+For example, if
+\calcone{} = (1,0,0,1) and \calctwo{} = (0,1,0,0),   
+then \calh[\calcone, \calctwo] = 3.  
+We say that two configurations \calcone{} and \calctwo{} 
+of a SyDS are $h$-\textbf{close} if \calh[\calco, \calct] ~=~ $h$. 
+Two configurations that are $h$-close for a small value of $h$
+can be thought of as `similar' configurations.  
+
+\smallskip
+
+\noindent
+\textbf{Similarity Measures for Sets of Configurations.} Recall
+that our focus is on studying the similarity between predecessors
+of similar configurations.
+To do this, we define several similarity measures between two sets of
+configurations.
+Suppose $S_1$ and $S_2$ are two nonempty sets of configurations.
+We will consider the following similarity measures.
+
+\newcommand{\minsep}{\mbox{\textsc{MinSep}}}
+\newcommand{\maxsep}{\mbox{\textsc{MaxSep}}}
+\newcommand{\avgsep}{\mbox{\textsc{AvgSep}}}
+
+\begin{description}
+\item{(a)} \textbf{Minimum Separation} (\minsep): This measure is defined as follows:
+\[ 
+\minsep(S_1, S_2) ~=~ \min\{ \calh[\calc, \calcp] ~:~ 
+                                \calc{} \in S_1,~ \calcp{} \in S_2\}.
+\]
+\item{(b)} \textbf{Maximum Separation} (\maxsep): This measure, which is
+analogous to minimum separation, is defined as follows.
+\[ 
+\maxsep(S_1, S_2) ~=~ \max\{ \calh[\calc, \calcp] ~:~ 
+                                \calc{} \in S_1,~ \calcp{} \in S_2\}.
+\]
+\item{(c)} \textbf{Average Separation} (\avgsep): This measure is defined as follows.
+\[ 
+\avgsep(S_1, S_2) ~=~ \displaystyle{\frac{\sum_{\mathcal{C} \in S_1,~ \mathcal{C}' \in S_2}
+                            \calh[\calc, \calcp]}{|S_1| \times |S_2|}}.
+\]
+\end{description}
+Among the above measures, \maxsep{} can be seen to provide 
+a stronger guarantee of similarity.
+This is because if \maxsep($S_1$, $S_2$) = $\alpha$, then the Hamming distance
+between any pair configurations \calc{} and \calcp, where \calc{} $\in S_1$
+and \calcp{} $\in S_2$, is at most $\alpha$.
+
+\smallskip
+
+In this paper, we will consider the above measures for pairs of sets
+which are nonempty and \emph{disjoint}. 
+Thus, the values of all the measures will be \emph{strictly positive}. 
+
+\smallskip
+
+Given a configuration \calc{} of a SyDS, we will use the notation \predset{\calc}{}
+to denote the set of all predecessors of \calc.
+The following lemma points out a simple property of predecessor sets
+of SyDSs.
+
+\begin{lemma}\label{lem:disjoint_pred}
+Let \cals{} be a SyDS and let \calcone{} and \calctwo{} be two different
+configurations of \cals.
+The sets \predset{\calcone}{} and \predset{\calctwo}{} are disjoint.
+\end{lemma}
+
+\noindent
+\textbf{Proof:}~ The proof is by contradiction.
+Suppose \predset{\calcone}{} and \predset{\calctwo}{} are not disjoint.
+Let $X$ be a configuration that appears in both
+\predset{\calcone}{} and \predset{\calctwo}.
+Then $X$ has two different successors, namely \calcone{} and \calctwo.
+This is a contradiction since each configuration in a SyDS has a \emph{unique}
+successor. The lemma follows. \QED
+

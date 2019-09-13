@@ -1,0 +1,33 @@
+\begin{picture}(0,0)%
+\includegraphics{syds_example.pdf}%
+\end{picture}%
+\setlength{\unitlength}{1865sp}%
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+\begin{picture}(3428,3661)(1336,-8135)
+\put(4681,-5101){\makebox(0,0)[lb]{\smash{{\SetFigFont{9}{10.8}{\sfdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$v_5$}%
+}}}}
+\put(2836,-8026){\makebox(0,0)[lb]{\smash{{\SetFigFont{9}{10.8}{\sfdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$v_1$}%
+}}}}
+\put(1351,-6226){\makebox(0,0)[lb]{\smash{{\SetFigFont{9}{10.8}{\sfdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$v_2$}%
+}}}}
+\put(2791,-4741){\makebox(0,0)[lb]{\smash{{\SetFigFont{9}{10.8}{\sfdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$v_3$}%
+}}}}
+\put(4726,-6316){\makebox(0,0)[lb]{\smash{{\SetFigFont{9}{10.8}{\sfdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$v_4$}%
+}}}}
+\put(2971,-7396){\makebox(0,0)[lb]{\smash{{\SetFigFont{8}{9.6}{\sfdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}(1)}%
+}}}}
+\put(4411,-6766){\makebox(0,0)[lb]{\smash{{\SetFigFont{8}{9.6}{\sfdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}(3)}%
+}}}}
+\put(1486,-6721){\makebox(0,0)[lb]{\smash{{\SetFigFont{8}{9.6}{\sfdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}(2)}%
+}}}}
+\put(3016,-5506){\makebox(0,0)[lb]{\smash{{\SetFigFont{8}{9.6}{\sfdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}(1)}%
+}}}}
+\put(4096,-5326){\makebox(0,0)[lb]{\smash{{\SetFigFont{8}{9.6}{\sfdefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}(2)}%
+}}}}
+\end{picture}%
