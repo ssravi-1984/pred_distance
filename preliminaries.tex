@@ -67,7 +67,7 @@ The underlying graph of a SyDS shown in
 Figure~\ref{fig:syds-example}.
 The threshold value for each node is shown within parentheses. 
 (Thus, the local function at $v_2$ is the 2-threshold function
-while that at $v_3$ is the 3-threshold function.)
+while that at $v_4$ is the 3-threshold function.)
 Suppose the initial configuration of the system is $(1, 1, 0, 0, 0)$;
 that is,
 $v_1$ and $v_2$ are in state 1 while 
@@ -114,12 +114,15 @@ value does not depend on the order in
 which the input bits are specified;
 that is, the function value depends only on how many
 of its inputs are 1.
+It can be seen that for any $k$, $k$-threshold functions belong to the 
+class of symmetric functions.
 A Boolean function $f$ is \textbf{$r$-symmetric} \cite{BH+07}
 if the inputs to $f$ can be partitioned into at most $r$ classes
 such that the value of $f$ depends only on how many of the
 inputs in each of the $r$ classes are 1.
+Note that any symmetric function is $1$-symmetric.
 %% \end{definition}
-Note that any Boolean function with $d$ inputs is $d$-symmetric.
+Also, any Boolean function with $d$ inputs is $d$-symmetric.
 We will be mainly concerned with $r$-symmetric functions 
 where $r$ is a \emph{fixed} integer.
 %% We say that a \underline{SyDS is $r$-symmetric}
@@ -144,7 +147,7 @@ Two configurations that are $h$-close for a small value of $h$
 can be thought of as `similar' configurations.  
 We note that in a SyDS with $n$ nodes, 
 the maximum Hamming distance between any pair of configurations
-\calcone{} and \calctwo{} is $n$; this happens when \calcone{}
+\calcone{} and \calctwo{} is $n$; this occurs when \calcone{}
 is the bitwise complement of \calctwo. 
 
 \smallskip
@@ -153,10 +156,10 @@ is the bitwise complement of \calctwo.
 \textbf{Similarity Measures for Sets of Configurations.} Recall
 that our focus is on studying the similarity between predecessors
 of similar configurations.
-To do this, we define several similarity measures between two sets of
+To do this, we define several distance measures between two sets of
 configurations.
 Suppose $S_1$ and $S_2$ are two nonempty sets of configurations.
-We will consider the following similarity measures.
+We will consider the following distance measures.
 
 \newcommand{\minsep}{\mbox{\textsc{MinSep}}}
 \newcommand{\maxsep}{\mbox{\textsc{MaxSep}}}
