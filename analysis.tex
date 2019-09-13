@@ -3,15 +3,84 @@
 
 In this section, we present several analytical results regarding the
 similarities of predecessor sets of two configurations of a SyDS.
+
 The first result shows that there are SyDSs such that 
 if a pair of distinct configurations is $h$-close, then 
 any pair of their predecessors is also $h$-close.
-Recall that for any configuration \calc, 
+Recall that for any configuration \calc, \predset{\calc}{}
+denotes the set of all predecessors of \calc.
 
 
-\begin{proposition}\label{pro:close-positive}
+\begin{proposition}\label{pro:close-close}
 For integers $n$ and $h$, where $n \geq 1$ and $1 \leq h \leq n$,
-there is a SyDS \cals{} with $n$
-nodes with the following property: for any pair of  $h$, $1 \leq h \leq n$
+there is a SyDS $\cals_1${} with $n$
+nodes satisfying both of the following properties: 
+(i) every configuration has a predecessor and (ii) 
+for any pair of distinct configurations
+\calcone{} and \calctwo{} that are $h$-close, 
+$\maxsep\left( \predset{\calcone},~ \predset{\calctwo} \right)$ ~=~ $h$.
 \end{proposition}
 
+\noindent
+\textbf{Proof:}~ The idea is to construct a SyDS in which each configuration
+is a fixed point.
+Thus, each configuration \calc{} has a predecessor, namely \calc{} itself.
+As a direct consequence, we have that if configurations \calcone{} and
+\calctwo{} are $h$-close for some integer $h$, $1 \leq h \leq n$,
+then the corresponding predecessors are also $h$-close.
+
+Such a SyDS $\cals_1${} can be constructed as follows.
+The underlying graph $G(V,E)$ has $n$ nodes and the set of edges is arbitrary.
+For each node $v \in V$, the value of local function $f_v$ is the 
+current state value of $v$; thus, $f_v$ ignores the states of all the nodes
+to which $v$ has an edge in $G$.
+In such a SyDS, it can be seen that successor of each configuration \calc{}
+is \calc{} itself; that is, each configuration is a fixed point. \QED
+
+Our next result shows that there are SyDSs for which 
+there is a pair of distinct configurations is $1$-close, but
+their predecessors are highly dissimilar; that is, they have 
+the maximum possible Hamming distance.
+
+\begin{proposition}\label{pro:close-far}
+For any integer $n \geq 1$,
+there is a SyDS $\cals_2${} with $n$
+nodes satisfying both of the following properties: 
+(i) every configuration has a predecessor and (ii) 
+there is a pair of configurations
+\calcone{} and \calctwo{} that are $1$-close but 
+$\minsep\left( \predset{\calcone},~ \predset{\calctwo} \right)$ ~=~ $n$.
+\end{proposition}
+
+\noindent
+\textbf{Proof:} \textcolor{red}{(To be checked.)}
+
+Consider the following SyDS $\cals_2$.
+The underlying graph $G(V,E)$ is a simple cycle on $n$ nodes.
+Choose any node of $G$, and call this node $x$ the {\em key node}. For
+every other node $v$, choose any neighbor $w$ of $v$ that is closer to the
+key node than $v$. Call this node $w$ the {\em key neighbor} of $v$.
+The local transition function of the key node $x$ is the identity
+function (i.e., the value of the local function $f_x$ at $x$ is
+the current state of $x$).
+For any other node $v$, the local transition function of
+$v$ is the XOR (i.e., exclusive or) of the state of $v$ 
+and that if its key neighbor.
+This completes the construction of S.
+
+Now consider any configuration \calcone. 
+Let \calctwo{} be the configuration that differs 
+from \calcone{} only in the value of the key node.
+
+We claim that \calcone{} and \calctwo{} have predecessors that differ in the
+values of all nodes. 
+Let $\calcone'$ and $\calctwo'$ denote the predecessors of
+\calcone{} and \calctwo.
+We use induction on the distance of a given node from the key node.
+First, since the transition function of the key node is the identity function,
+$\calcone'$ and $\calctwo'$ differ on the key node.
+Now, consider any nonkey node $v$.  Suppose its key neighbor is $u$.
+From the induction hypotheses, $\calcone'$ and $\calctwo'$ differ on $u$.
+Since \calcone{} and \calctwo{} have the same value of $v$, 
+but their predecessors have different values of $u$, 
+$\calcone'$ and $\calctwo'$ have different values of $v$. \QED
