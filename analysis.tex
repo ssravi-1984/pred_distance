@@ -53,12 +53,14 @@ is \calc{} itself; that is, each configuration is a fixed point. \QED
 %% the maximum possible Hamming distance.
 
 \begin{proposition}\label{pro:close-far}
-For any integer $n \geq 1$,
+For any integer $n \geq 2$,
 there is a SyDS $\cals_2${} with $n$
 nodes satisfying both of the following properties: 
-(i) every configuration has a predecessor and (ii) 
-there is a pair of configurations
-\calcone{} and \calctwo{} that are $1$-close but 
+(i) every configuration has a predecessor, 
+(ii) every local function is 2-symmetric and
+(iii) for every configuration
+\calcone, there is a configuration \calctwo{} such that 
+\calcone{} and \calctwo{} are $1$-close but 
 $\minsep\left( \predset{\calcone},~ \predset{\calctwo} \right)$ ~=~ $n$.
 \end{proposition}
 
@@ -95,7 +97,7 @@ Since \calcone{} and \calctwo{} have the same value of $v$,
 but their predecessors have different values of $u$, 
 $\calcone'$ and $\calctwo'$ have different values of $v$. \QED
 
-\begin{proposition}\label{pro:close-far}
+\begin{proposition}\label{pro:far-close}
 For any integer $n \geq 1$,
 there is a SyDS $\cals_3${} with $n$
 nodes satisfying both of the following properties: 

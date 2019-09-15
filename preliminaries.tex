@@ -61,6 +61,17 @@ value 1 iff at at least $k$ of its inputs are 1.
 \smallskip
 
 %%
+\begin{wrapfigure}[16]{l}{0.35\textwidth}
+\centering
+\input{syds_example.pdf_t}
+\caption{\small{An Example of a SyDS where each node has a
+threshold function. The threshold values are shown in parentheses.}}
+\label{fig:syds-example}
+\smallskip
+\end{wrapfigure}
+%%
+
+%%
 \noindent
 \textbf{Example:}~
 The underlying graph of a SyDS shown in
@@ -84,15 +95,6 @@ that is, the configuration $(1, 1, 1, 1, 1)$ is a \textbf{fixed point}.
 
 \smallskip
 
-%%
-\begin{wrapfigure}[16]{l}{0.35\textwidth}
-\centering
-\input{syds_example.pdf_t}
-\caption{\small{An Example of a SyDS where each node has a
-threshold function. The threshold values are shown in parentheses.}}
-\label{fig:syds-example}
-\smallskip
-\end{wrapfigure}
 
 \smallskip
 
@@ -136,13 +138,13 @@ where $r$ is a \emph{fixed} integer.
 Given two configurations \calcone{} and \calctwo{} of a SyDS
 over the domain $\{0,1\}$,
 the \textbf{Hamming Distance} between \calcone{} and \calctwo, 
-denoted by \calh[\calcone, \calctwo], is
+denoted by \calh(\calcone, \calctwo), is
 the number of positions in which they differ.
 For example, if
 \calcone{} = (1,0,0,1) and \calctwo{} = (0,1,0,0),   
-then \calh[\calcone, \calctwo] = 3.  
+then \calh(\calcone, \calctwo) = 3.  
 We say that two configurations \calcone{} and \calctwo{} 
-of a SyDS are $h$-\textbf{close} if \calh[\calco, \calct] ~=~ $h$. 
+of a SyDS are $h$-\textbf{close} if \calh(\calco, \calct) ~=~ $h$. 
 Two configurations that are $h$-close for a small value of $h$
 can be thought of as `similar' configurations.  
 We note that in a SyDS with $n$ nodes, 
@@ -168,19 +170,19 @@ We will consider the following distance measures.
 \begin{description}
 \item{(a)} \textbf{Minimum Separation} (\minsep): This measure is defined as follows:
 \[ 
-\minsep(S_1, S_2) ~=~ \min\{ \calh[\calc, \calcp] ~:~ 
+\minsep(S_1, S_2) ~=~ \min\{ \calh(\calc, \calcp) ~:~ 
                                 \calc{} \in S_1,~ \calcp{} \in S_2\}.
 \]
 \item{(b)} \textbf{Maximum Separation} (\maxsep): This measure, which is
 analogous to minimum separation, is defined as follows.
 \[ 
-\maxsep(S_1, S_2) ~=~ \max\{ \calh[\calc, \calcp] ~:~ 
+\maxsep(S_1, S_2) ~=~ \max\{ \calh(\calc, \calcp) ~:~ 
                                 \calc{} \in S_1,~ \calcp{} \in S_2\}.
 \]
 \item{(c)} \textbf{Average Separation} (\avgsep): This measure is defined as follows.
 \[ 
 \avgsep(S_1, S_2) ~=~ \displaystyle{\frac{\sum_{\mathcal{C} \in S_1,~ \mathcal{C}' \in S_2}
-                            \calh[\calc, \calcp]}{|S_1| \times |S_2|}}.
+                            \calh(\calc, \calcp)}{|S_1| \times |S_2|}}.
 \]
 \end{description}
 Among the above measures, \maxsep{} provides the 
