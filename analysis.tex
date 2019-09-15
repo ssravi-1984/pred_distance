@@ -3,23 +3,22 @@
 
 In this section, we present several analytical results regarding the
 similarities of predecessor sets of two configurations of a SyDS.
-
-The first result shows that there are SyDSs such that 
-if a pair of distinct configurations is $h$-close, then 
-any pair of their predecessors is also $h$-close.
-The second result shows that there are SyDSs such that 
-there is a pair of distinct configurations that is $1$-close, but 
-have predecessors which have the maximum level of dissimilarity
-(i.e., the Hamming distance these predecessor configurations
-is $n$, the number of nodes).
-In addition, we observe the existence of SyDSs in which there 
-are pairs of configurations which have the maximum level 
-of dissimilarity but their predecessors are 1-close. 
 These results point out that SyDSs may exhibit 
-extreme levels of behavior.
+extreme levels of behavior with respect to similarity.
 Throughout this section, the reader should bear in mind that
 for any configuration \calc, \predset{\calc}{}
 denotes the set of all predecessors of \calc.
+
+Our first result shows that there are SyDSs such that 
+if a pair of distinct configurations is $h$-close, then 
+any pair of their predecessors is also $h$-close.
+
+%% The second result shows that there are SyDSs such that 
+%% there is a pair of distinct configurations that is $1$-close, but 
+%% have predecessors which have the maximum level of dissimilarity
+%% (i.e., the Hamming distance these predecessor configurations
+%% is $n$, the number of nodes).
+
 
 \begin{proposition}\label{pro:close-close}
 For all integers $n$ and $h$, where $n \geq 1$ and $1 \leq h \leq n$,
@@ -47,10 +46,10 @@ to which $v$ has an edge in $G$.
 In such a SyDS, it can be seen that successor of each configuration \calc{}
 is \calc{} itself; that is, each configuration is a fixed point. \QED
 
-%% Our next result shows that there are SyDSs for which 
-%% there is a pair of distinct configurations is $1$-close, but
-%% their predecessors are highly dissimilar; that is, they have 
-%% the maximum possible Hamming distance.
+Our next result shows that there are SyDSs for which 
+there is a pair of distinct configurations is $1$-close, but
+their predecessors are highly dissimilar; that is, they have 
+the maximum possible Hamming distance.
 
 \begin{proposition}\label{pro:close-far}
 For any integer $n \geq 2$,
@@ -65,9 +64,78 @@ $\minsep\left( \predset{\calcone},~ \predset{\calctwo} \right)$ ~=~ $n$.
 \end{proposition}
 
 \noindent
-\textbf{Proof:} \textcolor{red}{(To be checked.)}
+\textbf{Proof:} 
+Let $G$ be any \emph{connected} graph on $n$ nodes.
+We will construct a SyDS $\cals_2${} with $G$ as its  underlying graph.
 
-Consider the following SyDS $\cals_2$.
+Before constructing $S$, we first construct a  spanning tree for $G$.
+Then we choose any node $w$ of G, and call this node the {\em root node}.
+For every other node $v$,
+we consider the spanning tree neighbor of $v$ 
+that is on the path from the root node to $v$.
+We call this node the {\em key neighbor} of $v$, 
+and denote it as $k(v)$.  
+For any node $v$,
+we let $K(v)$ denote the set of nodes along 
+the spanning tree path between the root node and $v$.
+Note that $K(v)$ includes the endpoints of this path.
+
+We now specify the local functions of $\cals_2$.
+The local function of the root node $w$ is the \emph{identity} function;
+that is, the value of the local function is the current state value of $w$.
+For any other node $v$ the local transition function of $v$ is $v \oplus k(v)$, that is,
+the exclusive-or of $v$ and its key neighbor.
+This completes the construction of $\cals_2$.
+
+For any configuration \calc{} and  node $u$, 
+we let $\calc(u)$ denote the value of $u$ in \calc.
+Also, for a set of nodes  $X$,
+we let $\hat{\calc}(X)$ denote the exclusive-or of $\calc(u)$ 
+over the multiset of values  $\{\calc(u) | u \in X\}$.
+
+Consider any configuration \calc.
+Let \calcp{} be the configuration where for each node $v$, 
+$\calcp(v) = \hat{\calc}(K(v))$.
+Let $\calc''$ be the successor of \calcp.
+If $v$ is the root node, then $K(v) = \{v\}$, so $\calcp(v) = \calc(v)$.
+Since the local function for the key node is the identity function,
+$\calc''(v) = \calc(v)$.
+If $v$ is not the key node, then from the local function for $v$,
+$\calc''(v) = \calcp(v)  \oplus \calcp(k(v))$.
+From the construction of \calcp,
+$\calcp(v) = \hat{\calc}(K(v))$ and $\calcp(k(v)) =  \hat{\calc}(K(k(v)))$.
+Note that $K(v) = K(k(v)) \cup \{v\}$.
+Thus, $\hat{\calc}(K(v)) = \hat{\calc}(K(k(v))) \oplus \calc(v)$.
+Hence, $\calc''(v) = \hat{\calc}(K(k(v))) \oplus \calc(v) \oplus  \hat{\calc}(K(k(v))) 
+= \calc(v)$.
+Consequently, \calcp{} is a predecessor of \calc.
+
+Since each configuration of $\cals_2$ has a predecessor, 
+and each configuration has exactly one successor,
+each configuration has a unique predecessor.
+
+Now consider any configuration $\calcone$.
+Let \calctwo{} be the configuration that differs from 
+\calcone{} only in the value of the root node.
+We claim that the predecessors $\calcone'$ and $\calctwo'$
+of \calcone{} and \calctwo{}, respectively, 
+differ in the values of all nodes.
+
+If $v$ is the root node, then since \calcone{} and \calctwo{} 
+differ in the value of the root node,
+$\calcone'$ and $\calctwo'$ also differ in the value of the root node.
+
+Suppose that $v$ is not the root node.
+Then $\calcone'(v) = \hat{\calcone}(K(v))$ and $\calctwo'(v) = \hat{\calctwo}(K(v))$.
+The values in $K(v)$ in \calcone{} and \calctwo{} differ 
+in the value of the root node, and no other node.
+Thus, $\calcone'(v)$ and $\calctwo'(v)$ have complementary values. \QED
+
+
+\iffalse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% old version of the proof. Not needed now.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The underlying graph $G(V,E)$ is a simple path on $n$ nodes.
 Choose any node of $G$, and call this node $x$ the {\em key node}. For
 every other node $v$, choose any neighbor $w$ of $v$ that is closer to the
@@ -96,6 +164,14 @@ From the induction hypotheses, $\calcone'$ and $\calctwo'$ differ on $u$.
 Since \calcone{} and \calctwo{} have the same value of $v$, 
 but their predecessors have different values of $u$, 
 $\calcone'$ and $\calctwo'$ have different values of $v$. \QED
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+
+\smallskip
+
+We now show the existence of SyDSs in which there 
+are pairs of configurations which have the maximum level 
+of dissimilarity but their predecessors are 1-close. 
 
 \begin{proposition}\label{pro:far-close}
 For any integer $n \geq 1$,
