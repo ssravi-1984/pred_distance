@@ -174,10 +174,41 @@ are pairs of configurations which have the maximum level
 of dissimilarity but their predecessors are 1-close. 
 
 \begin{proposition}\label{pro:far-close}
-For any integer $n \geq 1$,
+For any integer $n \geq 3$,
 there is a SyDS $\cals_3${} with $n$
 nodes satisfying both of the following properties: 
 (i) there is a pair of configurations
 \calcone{} and \calctwo{} that have a Hamming distance of $n$  and 
 (ii) $\maxsep\left( \predset{\calcone},~ \predset{\calctwo} \right)$ ~=~ $1$.
 \end{proposition}
+
+%%
+\begin{wrapfigure}[11]{l}{0.35\textwidth}
+\centering
+\input{star_graph.pdf_t}
+\caption{\small{Star graph used in the proof of
+Proposition~\ref{pro:far-close}.}}
+\label{fig:star-graph}
+\smallskip
+\end{wrapfigure}
+%%
+\noindent
+\textbf{Proof:}~ The underlying graph of the SyDS $\cals_3$ is
+the star graph on $n$ nodes shown in Figure~\ref{fig:star-graph}.
+The local function at the root node $v_1$ is the \emph{identity}
+function.
+For each node $v_i$, where $2 \leq i \leq n$, the local function
+$f_i$ is the exclusive or of the state of $v_i$ and that of $v_1$.  
+This completes the specification of $\cals_3$.
+
+Let \calcone{} be the configuration where each node is in state 1.
+Similarly, let \calctwo{} be the configuration where each node is in state 0.
+Thus, $\calh(\calcone, \calctwo) ~=~ n$.
+It can be verified that one of the predecessors of \calcone, 
+denoted by $\calcone'$, is
+the configuration where the state of $v_1$ is 1 and the states of all other
+nodes are 0.
+Likewise, \calctwo{} has a predecessor, denoted by $\calctwo'$,
+where all nodes are in state 0.
+Thus, $\calh(\calcone', \calctwo') ~=~ 1$.
+In other words, $\maxsep(\Pi(\calcone, \calctwo)) = n$, as required. \QED
