@@ -102,12 +102,13 @@ Since the local function for the key node is the identity function,
 $\calc''(v) = \calc(v)$.
 If $v$ is not the key node, then from the local function for $v$,
 $\calc''(v) = \calcp(v)  \oplus \calcp(k(v))$.
-From the construction of \calcp,
-$\calcp(v) = \hat{\calc}(K(v))$ and $\calcp(k(v)) =  \hat{\calc}(K(k(v)))$.
-Note that $K(v) = K(k(v)) \cup \{v\}$.
-Thus, $\hat{\calc}(K(v)) = \hat{\calc}(K(k(v))) \oplus \calc(v)$.
-Hence, $\calc''(v) = \hat{\calc}(K(k(v))) \oplus \calc(v) \oplus  \hat{\calc}(K(k(v))) 
-= \calc(v)$.
+From the construction of \calcp, note that
+$\calcp(v) = \hat{\calc}(K(v))$ and $\calcp(k(v))$ =  
+$\hat{\calc}(K(k(v)))$.
+Further, $K(v) = K(k(v)) \cup \{v\}$.
+Thus, $\hat{\calc}(K(v))$ = $\hat{\calc}(K(k(v))) \oplus \calc(v)$.
+Hence, $\calc''(v)$ = $\hat{\calc}(K(k(v))) \oplus \calc(v) \oplus  \hat{\calc}(K(k(v)))$
+= $\calc(v)$.
 Consequently, \calcp{} is a predecessor of \calc.
 
 Since each configuration of $\cals_2$ has a predecessor, 

@@ -185,7 +185,7 @@ analogous to minimum separation, is defined as follows.
                             \calh(\calc, \calcp)}{|S_1| \times |S_2|}}.
 \]
 \end{description}
-Among the above measures, \maxsep{} provides the 
+Among the above measures, a small value of \maxsep{} provides the 
 strongest guarantee of similarity.
 This is because if \maxsep($S_1$, $S_2$) = $\alpha$, and $\alpha$ is small,
 then the Hamming distance
@@ -196,8 +196,14 @@ each such configuration pair is $\alpha$-close.
 \smallskip
 
 In this paper, we will consider the above measures for pairs of sets
-which are nonempty and \emph{disjoint}. 
-Thus, the values of all the measures will be \emph{strictly positive}. 
+which are \emph{disjoint}.
+For convenience, when one or both of the sets of configurations
+$S_1$ and $S_2$ is empty, we will define the values of 
+$\minsep(S_1, S_2)$,
+$\maxsep(S_1, S_2)$ and $\avgsep(S_1, S_2)$ to be $\infty$.
+
+%% which are nonempty and \emph{disjoint}. 
+%% Thus, the values of all the measures will be \emph{strictly positive}. 
 
 \smallskip
 
