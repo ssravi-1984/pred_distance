@@ -2,6 +2,16 @@
 \label{sec:experiments}
 
 \noindent
+\textbf{Overview.}~ We first explain with an example how the 
+problem of finding 
+predecessors can be expressed as a SAT problem.
+We then discuss our experimental results.
+All of our experiments used the SAT-based approach for finding
+predecessors.
+
+\smallskip
+
+\noindent
 \textbf{Reducing Predecessor Finding to SAT:}
 We now discuss  a method to convert the problem of finding one or more
 predecessors of a given configuration of a SyDS into a general form 
@@ -11,26 +21,22 @@ problem into an expression of
 the form $F_1 \wedge F_2 \wedge \ldots \wedge F_r$, where each
 component $F_j$ ($1 \leq j \leq r$) is a Boolean subexpression,
 which need not be a clause (i.e., disjunction of literals).
-In practice, methods are known for converting any Boolean subexpression
+Methods are known for converting any Boolean subexpression
 into its CNF equivalent.
-This allows a SAT solver 
-to be used to solve the predecessor problem. 
+As a consequence, SAT solvers 
+can be used to solve the predecessor problem. 
 
-As before,
-we assume that $n$ denotes the number of nodes in the
-underlying graph of the SyDS. 
-Further, the nodes of the given SyDS are numbered 1 through $n$ 
+We assume that the nodes of the underlying graph of the
+given SyDS are numbered 1 through $n$ that
 and the local function at node $i$ is denoted by $f_i$,
 $1 \leq i \leq n$.
 For each node $i$, $N_i$ denotes the \textbf{closed neighborhood}
 of node $i$ (defined in Section~\ref{sec:prelim})
-in the underlying graph; thus, $N_i$ contains node $i$
-and all the neighbors of node $i$ in the underlying graph, $1 \leq i \leq n$.
-The state of each node in $N_i$ is an input to the
-local function $f_i$ at node $i$, $1 \leq i \leq n$.
+in the underlying graph; thus, the states of the nodes in $N_i$ 
+are the inputs to the local function $f_i$,
+$1 \leq i \leq n$.
 
 \smallskip
-
 
 Recall that the predecessor existence problem asks whether a given
 configuration \calc{} of a given SyDS \cals{}
@@ -41,7 +47,7 @@ Let \calc{} = $(c_1, c_2, \ldots, c_n)$ be
 the given configuration for which we need to 
 find a predecessor (if one exists).
 Note that each $c_i$ is a known 0 or 1 value, $1 \leq i \leq n$.
-we need to find a configuration 
+We need to find a configuration 
 $\calcp{} = (x_1, x_2, \ldots, x_n)$ such that \calcp{}
 is a predecessor of \calc{} (if one exists). 
 As before, this condition can be expressed as a SAT problem as follows.
@@ -64,7 +70,8 @@ Likewise, if $c_i = 1$, the above expression
 simplifies to $f_i(x_{i_1}, x_{i_2}, \ldots,  x_{i_k})$.
 
 Using $P_i$ to denote the subexpression given by Equation~\eqref{eqn:pre_cond_one}
-for node $i$, the condition to be satisfied for the fixed point is given by 
+for node $i$, the condition to be satisfied for \calcp{} to be a 
+predecessor of \calc{} is given by 
 \begin{equation}\label{eqn:pre_whole}
 P_1 ~\wedge~ P_2 ~\wedge~ \ldots ~\wedge~ P_n
 \end{equation}
@@ -77,22 +84,20 @@ If there is no satisfying assignment to the CNF formula corresponding
 to the expression in Equation~\eqref{eqn:pre_whole}, then \calc{}
 has no predecessor; that is, \calc{} is a Garden-of-Eden configuration.
 
-\medskip
-
+%%\medskip
 
 \begin{figure}[tbh]
-\rule{\textwidth}{0.01in}
+%%\rule{\textwidth}{0.01in}
 %\medskip
-\begin{minipage}{0.3\textwidth}
+\begin{minipage}{0.5\textwidth}
 \centering
-\includegraphics[scale=0.7]{./graph_example.pdf}
+%\hspace*{1in}
+\includegraphics[scale=0.75]{./graph_example.pdf}
 \end{minipage}
-\hspace*{0.5in}
-\begin{minipage}{0.6\textwidth}
-\underline{\textsf{Local Functions:}}
-
+\hspace*{0.25in}
+\begin{minipage}{0.4\textwidth}
+%%\underline{\textsf{Local Functions:}}
 \smallskip
-
 \noindent
 \begin{tabular}{|c|c|}\hline
 \textbf{Node} & \textbf{Function} \\ \hline
@@ -102,11 +107,12 @@ has no predecessor; that is, \calc{} is a Garden-of-Eden configuration.
 4  &  NOR \\ \hline
 \end{tabular}
 \end{minipage}
-\caption{\smallskip \small{Example of the SyDS used in describing
-our method of converting predecessor problem to SAT.}\medskip}
+\caption{\small{SyDS Example used to illustrate
+the conversion predecessor problem to SAT.}}
 \label{fig:syds_ex}
-\rule{\textwidth}{0.01in}
+%%\rule{\textwidth}{0.01in}
 \end{figure}
+%%
 
 \noindent
 \textbf{Example:} Consider the SyDS example shown in Figure~\ref{fig:syds_ex}.
@@ -124,26 +130,31 @@ $(x_1, x_2, x_3, x_4)$ is a predecessor of $(1, 0, 1, 0)$ is:
 $[1 ~\Leftrightarrow~ \mathrm{NAND}(x_1, x_2, x_3)] ~\wedge~
 [0 ~\Leftrightarrow~ \mathrm{NOR}(x_1, x_4)]$
 
-\medskip
+\smallskip
 
 \noindent
 The above expression can be simplified to:
 
-\medskip
-
-\noindent
-\hspace*{0.5in} $[\mathrm{OR}(x_1, x_2, x_3, x_4)] ~\wedge~
+\begin{center}
+$[\mathrm{OR}(x_1, x_2, x_3, x_4)] ~\wedge~
 [\neg\,\mathrm{AND}(x_1, x_2, x_3)] ~\wedge~ 
 [\mathrm{NAND}(x_1, x_2, x_3)] ~\wedge~
 [\neg\,\mathrm{NOR}(x_1, x_4)]$
-
-\medskip
+\end{center}
 
 \noindent
-By converting each subexpression above into its CNF equivalent, we can
-get a CNF formula for the predecessor problem.
+By converting each subexpression above into its CNF equivalent, and
+noticing that the term $[\mathrm{NAND}(x_1, x_2, x_3)]$ occurs twice
+in the above expression, we get the following simplified
+CNF formula:
 
-\medskip
+\begin{center}
+$(x_1 \vee  x_2 \vee  x_3 \vee  x_4)  ~\wedge~
+(\overline{x_1} \vee \overline{x_2} \vee \overline{x_3}) ~\wedge~ 
+(x_1 \vee x_4)$
+\end{center}
+
+%%\medskip
 
 \noindent
 \textbf{Note:}~ Simple constraints (such as requiring
@@ -153,3 +164,4 @@ single literal clauses.
 For example, we require a predecessor in which node 1 is in state 0
 and node 3 is in state 1, then we can add the single literal clauses
 $\overline{x_1}$ and $x_3$ to the resulting CNF expression.
+This illustrates the usefulness of the SAT formulation.
