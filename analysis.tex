@@ -213,3 +213,72 @@ Likewise, \calctwo{} has a predecessor, denoted by $\calctwo'$,
 where all nodes are in state 0.
 Thus, $\calh(\calcone', \calctwo') ~=~ 1$.
 In other words, $\maxsep(\Pi(\calcone, \calctwo)) = n$, as required. \QED
+
+\newcommand{\mps}{\mbox{MPS}}
+\newcommand{\pre}{\mbox{PRE}}
+
+\smallskip
+
+Finally, we present a simple result that shows the computational complexity
+of computing distance measures for predecessor configurations.
+The decision problem, which we call \textbf{Minimum Predecessor Separation} (\mps),
+is the following: given a SyDS \cals{} with $n$ nodes, two configurations \calcone,{}
+\calctwo{} and a positive integer $q$, is the value 
+$\minsep(\Pi(\calcone), \Pi(\calctwo))$ at most $q$?
+The following result points out that \mps{} is \cnp-complete.
+
+\begin{proposition}\label{pro:minsep-hard}
+The \mps{} problem is \cnp-complete.
+\end{proposition}
+
+\noindent
+\textbf{Proof:}~ It can be seen that \mps{} is in \cnp.
+To prove \cnp-hardness,
+we use a reduction from the 
+\textbf{Predecessor Existence} (\pre) problem: given a SyDS \cals{} and
+a configuration \calc, does \calc{} have a predecessor?
+The \pre{} problem was shown to be \cnp-hard in \cite{BH+07}
+even for SyDSs in which each node computes the 2-threshold function.
+We will use this problem in our reduction.
+
+\smallskip
+
+\noindent
+The reduction from the special version of the \pre{} problem to \mps{}
+is simple.
+\begin{enumerate}
+\item The SyDS \cals{} in the \mps{} instance is the same as the SyDS in the
+\pre{} instance.
+\item We set configuration \calcone{} of the \mps{} to be the one in which
+every node is in state 0.
+The configuration \calctwo{} of the \mps{} is the same as the configuration
+\calc{} specified in the \pre{} instance.
+\item We set $q = n$, the number of nodes in \cals.
+\end{enumerate}
+This completes the reduction. It can be seen that the reduction
+can be carried out in polynomial time.
+
+Suppose the \pre{} problem instance has a solution.
+Let $\calcp'$ be a predecessor of \calc.
+Since each local function of \cals{} is the 2-threshold function,
+configuration \calcone{} (where each node is in state 0) is a fixed point.
+Thus, $\Pi(\calcone)$ is nonempty; it includes \calcone.
+Since \calctwo{} is the same as \calc{} and \calc{} has a
+predecessor \calcp,  $\Pi(\calctwo)$ is also nonempty. 
+Hence, it follows that $\calh(\Pi(\calcone), \Pi(\calctwo))$ is at most $n$.
+In other words, the \mps{} instance has a solution.
+
+Now suppose the \mps{} instance has a solution.
+Since the bound $q$ on the value of 
+$\minsep(\Pi(\calcone), \Pi(\calctwo))$ is finite, 
+it follows that both 
+$Pi(\calcone)$ and $\Pi(\calctwo))$ are nonempty. 
+In other words, the configuration \calctwo{} = \calc{}
+has a predecessor; that is, the \pre{} instance has a solution.
+This completes the proof of Proposition~\ref{pro:minsep-hard}. \QED
+
+In general, a configuration of a SyDS may have exponentially large
+number of predecessors.
+So, it is not clear
+
+
