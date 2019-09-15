@@ -227,3 +227,20 @@ Then $X$ has two different successors, namely \calcone{} and \calctwo.
 This is a contradiction since each configuration in a SyDS has a \emph{unique}
 successor. The lemma follows. \QED
 
+\smallskip
+
+\noindent
+\textbf{Boolean Satisfiability Problem (SAT):}~ Given an $m$-variable Boolean 
+function $F$ of in conjunctive normal form (CNF), the goal of the 
+Satisfiability problem (SAT) problem is to determine whether there is an assignment
+of Boolean values to the variables so that the function $F$ evaluates to true
+under the assignment.
+This is a well known \cnp-complete problem \cite{GJ-1979}.
+Many public domain SAT solvers are currently available to obtain solutions
+to practical SAT instances \cite{sat-live}.
+We will explain in Section~\ref{sec:experiments} how the problem of finding
+predecessors of a given configuration can be reduced to an appropriate 
+instance of the SAT problem.
+Our experimental results presented in Section~\ref{sec:experiments}
+use SAT solvers for fining predecessors.
+
