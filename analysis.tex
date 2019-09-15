@@ -170,6 +170,16 @@ $\calcone'$ and $\calctwo'$ have different values of $v$. \QED
 
 \smallskip
 
+%%
+\begin{wrapfigure}[9]{l}{0.35\textwidth}
+\centering
+\input{star_graph.pdf_t}
+\caption{\small{Star graph used in the proof of
+Proposition~\ref{pro:far-close}.}}
+\label{fig:star-graph}
+\smallskip
+\end{wrapfigure}
+%%
 We now show the existence of SyDSs in which there 
 are pairs of configurations which have the maximum level 
 of dissimilarity but their predecessors are 1-close. 
@@ -179,20 +189,10 @@ For any integer $n \geq 3$,
 there is a SyDS $\cals_3${} with $n$
 nodes satisfying both of the following properties: 
 (i) there is a pair of configurations
-\calcone{} and \calctwo{} that have a Hamming distance of $n$  and 
+\calcone{} and \calctwo{} with $\calh(\calcone, \calctwo) = n$  and 
 (ii) $\maxsep\left( \predset{\calcone},~ \predset{\calctwo} \right)$ ~=~ $1$.
 \end{proposition}
 
-%%
-\begin{wrapfigure}[11]{l}{0.35\textwidth}
-\centering
-\input{star_graph.pdf_t}
-\caption{\small{Star graph used in the proof of
-Proposition~\ref{pro:far-close}.}}
-\label{fig:star-graph}
-\smallskip
-\end{wrapfigure}
-%%
 \noindent
 \textbf{Proof:}~ The underlying graph of the SyDS $\cals_3$ is
 the star graph on $n$ nodes shown in Figure~\ref{fig:star-graph}.
@@ -205,14 +205,27 @@ This completes the specification of $\cals_3$.
 Let \calcone{} be the configuration where each node is in state 1.
 Similarly, let \calctwo{} be the configuration where each node is in state 0.
 Thus, $\calh(\calcone, \calctwo) ~=~ n$.
-It can be verified that one of the predecessors of \calcone, 
-denoted by $\calcone'$, is
+It can be verified that the configuration
+$\calcone'$, 
 the configuration where the state of $v_1$ is 1 and the states of all other
-nodes are 0.
-Likewise, \calctwo{} has a predecessor, denoted by $\calctwo'$,
-where all nodes are in state 0.
+nodes are 0 is a predecessor of \calcone.
+We now claim that $\calcone'$ is the \emph{only} predecessor of \calcone.
+To see this, note that  in any predecessor of \calcone, 
+the state of node $v_1$ must be 1
+since the local function at $v_1$ is the 
+identity function and $\calcone(v_1) = 1$.
+Now, for any node $v_i$, $2 \leq i \leq n$, 
+suppose the state of $v_i$ in the predecessor is 1. 
+Then, since the local function at $v_i$ is the exclusive or of the states of $v_1$
+and $v_i$, the next state of $v_i$ will be 0 where as \calcone{} specifies
+the state of $v_i$ as 1. 
+Therefore, in any predecessor, for $2 \leq i \leq n$, the state of $v_i$ must be 0.
+Hence, \calcone{} has a \emph{unique} predecessor, namely $\calcone'$.
+In a similar manner, it can be seen that \calctwo{} has a unique predecessor 
+$\calctwo'$, where all nodes are in state 0.
 Thus, $\calh(\calcone', \calctwo') ~=~ 1$.
-In other words, $\maxsep(\Pi(\calcone, \calctwo)) = n$, as required. \QED
+Since the predecessors of \calcone{} and \calctwo{} are unique,
+it follows that $\maxsep(\Pi(\calcone, \calctwo)) = 1$, as required. \QED
 
 \newcommand{\mps}{\mbox{MPS}}
 \newcommand{\pre}{\mbox{PRE}}
