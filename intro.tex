@@ -2,13 +2,8 @@
 \label{sec:intro}
 
 \noindent
-\textbf{Motivation.}~ \textcolor{red}{(To be added.)}
-
-
-\smallskip
-
-\noindent
-\textbf{Research Questions and Summary of Results.} Informally speaking,
+\textbf{Motivation.}~ 
+Informally speaking,
 the main question addressed in this paper is whether two configurations
 that are similar evolved along similar trajectories.
 To formulate a more concrete version of this question, we consider
@@ -16,6 +11,38 @@ two similar configurations, say \calcone{} and \calctwo, and
 investigate questions regarding the similarity of their predecessor
 configurations.
 \textcolor{red}{(More to be added.)}
+
+\smallskip
+
+\noindent
+\textbf{Summary of Results.}~ We present both theoretical and
+experimental results.
+Our theoretical results show that SyDSs may exhibit
+extreme behaviors with respect to the evolution of configurations.
+One of our results shows that there are SyDSs in which
+for any two configurations \calcone{} and \calctwo{} 
+which differ in $h$ bits, there are respective predecessors 
+$\calcone'$ and $\calctwo'$ which also differ in exactly $h$ bits.
+On the other hand, we also present examples of SyDSs in which
+highly dissimilar configurations (i.e., configurations that differ
+in all the $n$ bits) have predecessors that are very similar (i.e., they
+differ in just one bit).
+Likewise, we construct examples of SyDSs where two very similar 
+configurations have highly dissimilar predecessors.
+These examples point out that SyDSs may exhibit high sensitivity
+with respect to initial conditions (i.e., starting configurations).
+We also consider the problem of computing similarity
+measures of predecessors of given configurations and show that
+the problem is, in general, computationally intractable.
+
+Our experimental results are based on using public domain Satisfiability
+(SAT) solvers \cite{sat-live}.
+We illustrate how the problem of computing predecessors of a
+configuration can be expressed as an instance of the SAT
+problem \cite{GJ-1979}.
+Our experiments consider restricted classes of graphs and local functions.
+\textcolor{red}{(More to be added after we have the experimental results.)}
+
 
 
 \smallskip
