@@ -4,7 +4,7 @@
 
 %%\vspace*{-.22in}
 \textbf{Synchronous Dynamical Systems and Local Functions.}~
-We follow the presentation in \cite{BH+07} to discuss
+We follow the presentation in \cite{BH+07} for
 the basic definitions associated with discrete dynamical systems.
 Let \bbb{} denote the Boolean domain \{0,1\}.
 A \textbf{Synchronous Dynamical System} (SyDS)
@@ -38,13 +38,13 @@ is denoted by $\calc(v)$.
 In a SyDS, all nodes compute and update their next state  
 \emph{synchronously}.
 Other update disciplines (e.g., sequential updates) 
-have also been considered in the literature (e.g., \cite{BH+07}).
+have also been considered in the literature (e.g., \cite{MR-2007,BH+07}).
 Suppose a given SyDS transitions in one step from
 a configuration \calcp{} to a configuration \calc.
 Then we say that \calc{} is the \textbf{successor} of \calcp,
 and \calcp{} is a \textbf{predecessor} of \calc.
 Since the SyDSs considered in this paper are deterministic,
-each configuration has a unique successor.
+each configuration has a \emph{unique} successor.
 However, a configuration may have zero
 or more predecessors.
 In the graph dynamical systems literature, configurations with 
@@ -63,9 +63,9 @@ threshold function. The threshold values are shown in parentheses.}}
 \end{wrapfigure}
 %%
 SyDSs have been considered in the literature under many 
-classes of local interaction functions 
+classes of local functions 
 (see e.g., \cite{BH+07,Kawachi-et-al-2017}).
-We now present an an example of a SyDS where the local function
+We now present an example of a SyDS where the local function
 at each node is a \textbf{threshold function}. 
 For each integer $k \geq 0$, the $k$-\textbf{threshold function} has the
 value 1 iff at at least $k$ of its inputs are 1.
@@ -97,11 +97,7 @@ that is, the configuration $(1, 1, 1, 1, 1)$ is a \textbf{fixed point}.
 \smallskip
 
 \noindent
-\textbf{Additional Notation and Terminology.}~ Here, we introduce some additional
-terminology and notation that will be used 
-throughout the paper. 
-For a configuration \calc, the state of a node $v$ in \calc{}
-is denoted by $\calc(v)$.
+\textbf{Additional Notation and Terminology.}~ 
 Given a graph $G(V,E)$ and a node $v \in V$, the \textbf{closed neighborhood}
 of $v$, denoted by $N[v]$, consists of $v$ and all its neighbors.
 %% The definitions of \emph{tree decomposition} and
@@ -116,10 +112,10 @@ value does not depend on the order in
 which the input bits are specified;
 that is, the function value depends only on how many
 of its inputs are 1.
-It can be seen that for any $k$, $k$-threshold functions belong to the 
-class of symmetric functions.
+For each integer $k \geq 0$,
+it can be seen that the $k$-threshold function is symmetric. 
 A Boolean function $f$ is \textbf{$r$-symmetric} \cite{BH+07}
-if the inputs to $f$ can be partitioned into at most $r$ classes
+if its inputs can be partitioned into at most $r$ classes
 such that the value of $f$ depends only on how many of the
 inputs in each of the $r$ classes are 1.
 Note that any symmetric function is $1$-symmetric.
@@ -156,7 +152,7 @@ is the bitwise complement of \calctwo.
 
 \noindent
 \textbf{Similarity Measures for Sets of Configurations.} Recall
-that our focus is on studying the similarity between predecessors
+that our focus is on studying the degree of similarity between predecessors
 of similar configurations.
 To do this, we define several distance measures between two sets of
 configurations.
@@ -195,10 +191,10 @@ each such configuration pair is $\alpha$-close.
 
 \smallskip
 
-In this paper, we will consider the above measures for pairs of sets
-which are \emph{disjoint}.
-For convenience, when one or both of the sets of configurations
-$S_1$ and $S_2$ is empty, we will define the values of 
+%% In this paper, we will consider the above measures for pairs of sets
+%% which are \emph{disjoint}.
+For convenience, when at least one of the sets 
+$S_1$ and $S_2$ is empty, we define the values of 
 $\minsep(S_1, S_2)$,
 $\maxsep(S_1, S_2)$ and $\avgsep(S_1, S_2)$ to be $\infty$.
 
@@ -207,7 +203,7 @@ $\maxsep(S_1, S_2)$ and $\avgsep(S_1, S_2)$ to be $\infty$.
 
 \smallskip
 
-Given a configuration \calc{} of a SyDS, we will use the notation \predset{\calc}{}
+Given a configuration \calc{} of a SyDS, we use the notation \predset{\calc}{}
 to denote the set of all predecessors of \calc.
 The following lemma points out a simple property of predecessor sets
 of SyDSs.
@@ -220,8 +216,7 @@ The sets \predset{\calcone}{} and \predset{\calctwo}{} are disjoint.
 
 \noindent
 \textbf{Proof:}~ The proof is by contradiction.
-Suppose \predset{\calcone}{} and \predset{\calctwo}{} are not disjoint.
-Let $X$ be a configuration that appears in both
+Let $X$ a configuration appears in both
 \predset{\calcone}{} and \predset{\calctwo}.
 Then $X$ has two different successors, namely \calcone{} and \calctwo.
 This is a contradiction since each configuration in a SyDS has a \emph{unique}
@@ -233,14 +228,13 @@ successor. The lemma follows. \QED
 \textbf{Boolean Satisfiability Problem (SAT):}~ Given an $m$-variable Boolean 
 function $F$ of in conjunctive normal form (CNF), the goal of the 
 Satisfiability problem (SAT) problem is to determine whether there is an assignment
-of Boolean values to the variables so that the function $F$ evaluates to true
-under the assignment.
+of a Boolean values to each of the $m$ variables so that 
+the function $F$ evaluates to true under the assignment.
 This is a well known \cnp-complete problem \cite{GJ-1979}.
 Many public domain SAT solvers are currently available to obtain solutions
 to practical SAT instances \cite{sat-live}.
 We will explain in Section~\ref{sec:experiments} how the problem of finding
 predecessors of a given configuration can be reduced to an appropriate 
-instance of the SAT problem.
-Our experimental results presented in Section~\ref{sec:experiments}
-use SAT solvers for fining predecessors.
+instance of SAT.
+Most of the results in that section were generated using SAT solvers.
 
