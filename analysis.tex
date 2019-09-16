@@ -3,14 +3,14 @@
 
 In this section, we present several analytical results regarding the
 similarities of predecessor sets of two configurations of a SyDS.
-These results point out that SyDSs may exhibit 
-extreme levels of behavior with respect to similarity.
+%These results point out that SyDSs may exhibit 
+%extreme levels of behavior with respect to similarity.
 Throughout this section, the reader should bear in mind that
 for any configuration \calc, \predset{\calc}{}
 denotes the set of all predecessors of \calc.
 
 Our first result shows that there are SyDSs such that 
-if a pair of distinct configurations is $h$-close, then 
+when a pair of distinct configurations is $h$-close, then 
 any pair of their predecessors is also $h$-close.
 
 %% The second result shows that there are SyDSs such that 
@@ -33,21 +33,22 @@ $\maxsep\left( \predset{\calcone},~ \predset{\calctwo} \right)$ ~=~ $h$.
 \noindent
 \textbf{Proof:}~ The idea is to construct a SyDS in which each configuration
 is a fixed point.
-Thus, each configuration \calc{} has a predecessor, namely \calc{} itself.
+Thus, each configuration \calc{} has a \emph{unique} predecessor, namely \calc{} itself.
 As a direct consequence, we have that if configurations \calcone{} and
 \calctwo{} are $h$-close for some integer $h$, $1 \leq h \leq n$,
 then the corresponding predecessors are also $h$-close.
 
 Such a SyDS $\cals_1${} can be constructed as follows.
 The underlying graph $G(V,E)$ has $n$ nodes and the set of edges is arbitrary.
-For each node $v \in V$, the value of local function $f_v$ is the 
-current state value of $v$; thus, $f_v$ ignores the states of all the nodes
-to which $v$ has an edge in $G$.
+For each node $v \in V$, the local function is the \emph{identity} function.
+In other words, the value of local function $f_v$ is the 
+current state value of $v$, regardless of the state values of 
+the other nodes in the closed neighborhood of $v$.
 In such a SyDS, it can be seen that successor of each configuration \calc{}
 is \calc{} itself; that is, each configuration is a fixed point. \QED
 
 Our next result shows that there are SyDSs for which 
-there is a pair of distinct configurations is $1$-close, but
+there are two distinct configurations that are $1$-close, but
 their predecessors are highly dissimilar; that is, they have 
 the maximum possible Hamming distance.
 
@@ -132,42 +133,6 @@ The values in $K(v)$ in \calcone{} and \calctwo{} differ
 in the value of the root node, and no other node.
 Thus, $\calcone'(v)$ and $\calctwo'(v)$ have complementary values. \QED
 
-
-\iffalse
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% old version of the proof. Not needed now.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The underlying graph $G(V,E)$ is a simple path on $n$ nodes.
-Choose any node of $G$, and call this node $x$ the {\em key node}. For
-every other node $v$, choose any neighbor $w$ of $v$ that is closer to the
-key node than $v$. Call this node $w$ the {\em key neighbor} of $v$.
-The local transition function of the key node $x$ is the identity
-function (i.e., the value of the local function $f_x$ at $x$ is
-the current state of $x$).
-For any other node $v$, the local transition function of
-$v$ is the XOR (i.e., exclusive or) of the state of $v$ 
-and that if its key neighbor.
-This completes the construction of S.
-
-Now consider any configuration \calcone. 
-Let \calctwo{} be the configuration that differs 
-from \calcone{} only in the value of the key node.
-
-We claim that \calcone{} and \calctwo{} have predecessors that differ in the
-values of all nodes. 
-Let $\calcone'$ and $\calctwo'$ denote the predecessors of
-\calcone{} and \calctwo.
-We use induction on the distance of a given node from the key node.
-First, since the transition function of the key node is the identity function,
-$\calcone'$ and $\calctwo'$ differ on the key node.
-Now, consider any nonkey node $v$.  Suppose its key neighbor is $u$.
-From the induction hypotheses, $\calcone'$ and $\calctwo'$ differ on $u$.
-Since \calcone{} and \calctwo{} have the same value of $v$, 
-but their predecessors have different values of $u$, 
-$\calcone'$ and $\calctwo'$ have different values of $v$. \QED
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\fi
-
 \smallskip
 
 %%
@@ -222,23 +187,24 @@ the state of $v_i$ as 1.
 Therefore, in any predecessor, for $2 \leq i \leq n$, the state of $v_i$ must be 0.
 Hence, \calcone{} has a \emph{unique} predecessor, namely $\calcone'$.
 In a similar manner, it can be seen that \calctwo{} has a unique predecessor 
-$\calctwo'$, where all nodes are in state 0.
+$\calctwo'$, which is \calctwo{} itself.
 Thus, $\calh(\calcone', \calctwo') ~=~ 1$.
 Since the predecessors of \calcone{} and \calctwo{} are unique,
-it follows that $\maxsep(\Pi(\calcone, \calctwo)) = 1$, as required. \QED
+it follows that $\maxsep(\Pi(\calcone), \Pi(\calctwo)) = 1$, as indicated
+in the statement of Proposition~\ref{pro:far-close}. \QED
 
 \newcommand{\mps}{\mbox{MPS}}
 \newcommand{\pre}{\mbox{PRE}}
 
 \smallskip
 
-Finally, we present a simple result that shows the computational complexity
+Finally, we present a simple result that establishes the computational complexity
 of computing distance measures for predecessor configurations.
 The decision problem, which we call \textbf{Minimum Predecessor Separation} (\mps),
 is the following: given a SyDS \cals{} with $n$ nodes, two configurations \calcone,{}
-\calctwo{} and a positive integer $q$, is the value 
+\calctwo{} and a positive integer $q$, is the value of
 $\minsep(\Pi(\calcone), \Pi(\calctwo))$ at most $q$?
-The following result points out that \mps{} is \cnp-complete.
+We have the following result.
 
 \begin{proposition}\label{pro:minsep-hard}
 The \mps{} problem is \cnp-complete.
@@ -266,6 +232,8 @@ is simple.
 every node is in state 0.
 The configuration \calctwo{} of the \mps{} is the same as the configuration
 \calc{} specified in the \pre{} instance.
+(In configuration \calc, some nodes have the value 1. So,
+\calc{} which is the same as \calctwo, is different from \calcone.)
 \item We set $q = n$, the number of nodes in \cals.
 \end{enumerate}
 This completes the reduction. It can be seen that the reduction
@@ -285,7 +253,7 @@ Now suppose the \mps{} instance has a solution.
 Since the bound $q$ on the value of 
 $\minsep(\Pi(\calcone), \Pi(\calctwo))$ is finite, 
 it follows that both 
-$Pi(\calcone)$ and $\Pi(\calctwo))$ are nonempty. 
+$\Pi(\calcone)$ and $\Pi(\calctwo))$ are nonempty. 
 In other words, the configuration \calctwo{} = \calc{}
 has a predecessor; that is, the \pre{} instance has a solution.
 This completes the proof of Proposition~\ref{pro:minsep-hard}. \QED
