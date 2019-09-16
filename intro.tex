@@ -51,25 +51,28 @@ Our results are summarized below.
 
 \noindent
 \textbf{Summary of Results.}~ 
-Our theoretical results show that SyDSs may exhibit
+Our theoretical results are presented in Section~\ref{sec:analysis}.
+They  show that SyDSs may exhibit
 extreme behaviors with respect to the evolution of configurations.
-For example, one of our results shows that there are SyDSs in which
+For example, one of our results (Proposition~\ref{pro:close-close})  
+shows that there are SyDSs in which
 for any two configurations \calcone{} and \calctwo{} 
 which differ in $h$ bits, there are respective predecessors 
 $\calcone'$ and $\calctwo'$ which also differ in exactly $h$ bits.
-On the other hand, we present examples of SyDSs in which
-highly dissimilar configurations (i.e., configurations that differ
-in all the bits) have predecessors that are very similar (i.e., they
-differ in just one bit).
-Likewise, we construct examples of SyDSs where two very similar 
-configurations have highly dissimilar predecessors.
+We also show (Proposition~\ref{pro:close-far})
+how to construct examples of SyDSs where two very similar 
+configurations (which are 1-close) have highly dissimilar predecessors
+(i.e., they differ in all the bits).
+Further, we present examples of SyDSs (Proposition~\ref{pro:far-close})
+in which highly dissimilar configurations have predecessors that are 1-close.
 These examples point out that SyDSs may exhibit high level of sensitivity
 with respect to initial conditions (i.e., starting configurations).
 We also consider the problem of computing similarity
 measures of the predecessors of two given configurations and show that
 the problem is, in general, computationally intractable.
 
-Our experimental results are based on using public domain Boolean Satisfiability
+Our experimental results presented in Section~\ref{sec:experiments}
+are based on using public domain Boolean Satisfiability
 (SAT) solvers (e.g., \cite{sat-live}).
 We illustrate how the problem of computing predecessors of a
 configuration can be expressed as an instance of the SAT
