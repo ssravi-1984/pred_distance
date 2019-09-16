@@ -13,22 +13,9 @@ predecessors.
 
 \noindent
 \textbf{Reducing Predecessor Finding to SAT:}
-We now discuss  a method to convert the problem of finding one or more
-predecessors of a given configuration of a SyDS into a general form 
-of the Boolean Satisfiability problem. 
-This method converts the predecessor 
-problem into an expression of
-the form $F_1 \wedge F_2 \wedge \ldots \wedge F_r$, where each
-component $F_j$ ($1 \leq j \leq r$) is a Boolean subexpression,
-which need not be a clause (i.e., disjunction of literals).
-Methods are known for converting any Boolean subexpression
-into its CNF equivalent.
-As a consequence, SAT solvers 
-can be used to solve the predecessor problem. 
-
 We assume that the nodes of the underlying graph of the
-given SyDS are numbered 1 through $n$ that
-and the local function at node $i$ is denoted by $f_i$,
+given SyDS are numbered 1 through $n$ and that
+the local function at node $i$ is denoted by $f_i$,
 $1 \leq i \leq n$.
 For each node $i$, $N_i$ denotes the \textbf{closed neighborhood}
 of node $i$ (defined in Section~\ref{sec:prelim})
@@ -36,13 +23,6 @@ in the underlying graph; thus, the states of the nodes in $N_i$
 are the inputs to the local function $f_i$,
 $1 \leq i \leq n$.
 
-\smallskip
-
-Recall that the predecessor existence problem asks whether a given
-configuration \calc{} of a given SyDS \cals{}
-has a predecessor, that is, a configuration \calcp{} such that 
-\calc{} is the successor of \calcp.
-If so, we want to find one such configuration.
 Let \calc{} = $(c_1, c_2, \ldots, c_n)$ be
 the given configuration for which we need to 
 find a predecessor (if one exists).
@@ -58,9 +38,9 @@ denote the closed neighborhood of node $i$, where $r = |N_i|$.
 Thus, the inputs to the local function $f_i$ at node $i$
 are $x_{i_1}$, $x_{i_2}$, $\ldots$,  $x_{i_r}$.
 Since we want \calcp{} to be a predecessor of \calc, the condition to
-be satisfied at node $i$ is:
+be satisfied at node $i$ is the following:
 \begin{equation}\label{eqn:pre_cond_one}
-     c_i  ~\Leftrightarrow~ f_i(x_{i_1}, x_{i_2}, \ldots,  x_{i_k})
+     c_i  ~\Leftrightarrow~ f_i(x_{i_1}, x_{i_2}, \ldots,  x_{i_k}).
 \end{equation}
 Since $c_i$ is a known 0 or 1 value, the expression given 
 in Equation~\eqref{eqn:pre_cond_one} can be simplified.
@@ -73,7 +53,7 @@ Using $P_i$ to denote the subexpression given by Equation~\eqref{eqn:pre_cond_on
 for node $i$, the condition to be satisfied for \calcp{} to be a 
 predecessor of \calc{} is given by 
 \begin{equation}\label{eqn:pre_whole}
-P_1 ~\wedge~ P_2 ~\wedge~ \ldots ~\wedge~ P_n
+P_1 ~\wedge~ P_2 ~\wedge~ \ldots ~\wedge~ P_n.
 \end{equation}
 As before, since each subexpression $P_i$ can be expressed as an equivalent CNF, 
 we can get a CNF formula with variables $x_1$, $x_2$, $\ldots$, $x_n$
@@ -161,7 +141,12 @@ $(x_1 \vee  x_2 \vee  x_3 \vee  x_4)  ~\wedge~
 the states of some nodes to be 0 and/or those of some nodes to be 1
 in the predecessor) can be handled by inserting appropriate 
 single literal clauses.
-For example, we require a predecessor in which node 1 is in state 0
+For example, if we require a predecessor in which node 1 is in state 0
 and node 3 is in state 1, then we can add the single literal clauses
 $\overline{x_1}$ and $x_3$ to the resulting CNF expression.
-This illustrates the usefulness of the SAT formulation.
+This illustrates an additional benefit of the SAT formulation.
+
+\smallskip
+
+\noindent
+\textbf{Experimental Procedure and Results:}~ \textcolor{red}{(To be added.)}
