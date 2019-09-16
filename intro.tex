@@ -1,22 +1,52 @@
 \section{Introduction}
 \label{sec:intro}
 
-\noindent
-\textbf{Motivation.}~ 
-Informally speaking,
-the main question addressed in this paper is whether two configurations
-that are similar evolved along similar trajectories.
-To formulate a more concrete version of this question, we consider
-two similar configurations, say \calcone{} and \calctwo, and
-investigate questions regarding the similarity of their predecessor
-configurations.
-\textcolor{red}{(More to be added.)}
+Discrete graph dynamical systems, are
+generalizations of cellular automata (CA) \cite{Wol-1987,Gut-1989}.
+They serve as a useful formal model in may 
+contexts, including  multi-agent systems, 
+simulations of networked entities and propagation
+of contagions in social networks 
+(see, e.g., \cite{Woo-2002,MR-2007,Valente-1996}).
+Here, we focus on one such class of graph dynamical systems,
+namely \emph{synchronous} discrete dynamical systems (SyDSs).
+Informally,
+a SyDS\footnote{Formal definitions associated with SyDSs are presented
+in Section~\ref{sec:prelim}.}
+ consists of an undirected graph whose vertices represent
+entities and edges represent local interactions among entities.
+Each vertex $v$ has a Boolean state value and
+a local transition function $f_v$
+whose inputs are the current state of $v$ and those its neighbors;
+the output of $f_v$ is the next state of $v$.
+The vector consisting of the state values of all the nodes at each time instant
+is referred to as the \textbf{configuration} of the system at that instant.
+In each time step, all nodes of a SyDS compute and update their
+states \emph{synchronously}.
+Starting from a (given) initial configuration,
+the time evolution of a SyDS consists of a
+sequence of successive configurations.
+
+In this paper, we examine questions related to the evolution
+of configurations that are \emph{similar}, where the notion of similarity
+is measured by the Hamming distance (i.e., the number of positions
+where the two configurations differ). 
+The goal is to obtain an
+understanding of when such configurations may evolve along 
+similar trajectories.
+To formulate a concrete version of this question, we consider
+two similar configurations and
+investigate questions regarding the similarity of 
+their \emph{predecessor} configurations (i.e., configurations that
+just preceded the given configurations in the time evolution of the system).
+We study problems regarding the similarity of predecessor configurations
+both analytically and experimentally. 
+Our results are summarized below.
 
 \smallskip
 
 \noindent
-\textbf{Summary of Results.}~ We present both theoretical and
-experimental results.
+\textbf{Summary of Results.}~ 
 Our theoretical results show that SyDSs may exhibit
 extreme behaviors with respect to the evolution of configurations.
 One of our results shows that there are SyDSs in which
