@@ -1,13 +1,13 @@
 \section{Introduction}
 \label{sec:intro}
 
-Discrete graph dynamical systems, are
+Discrete graph dynamical systems are
 generalizations of cellular automata (CA) \cite{Wol-1987,Gut-1989}.
 They serve as a useful formal model in may 
 contexts, including  multi-agent systems, 
 simulations of networked entities and propagation
 of contagions in social networks 
-(see, e.g., \cite{Woo-2002,MR-2007,Valente-1996}).
+(e.g., \cite{Woo-2002,MR-2007,Valente-1996}).
 Here, we focus on one such class of graph dynamical systems,
 namely \emph{synchronous} discrete dynamical systems (SyDSs).
 Informally,
@@ -15,8 +15,8 @@ a SyDS\footnote{Formal definitions associated with SyDSs are presented
 in Section~\ref{sec:prelim}.}
  consists of an undirected graph whose vertices represent
 entities and edges represent local interactions among entities.
-Each vertex $v$ has a Boolean state value and
-a local transition function $f_v$
+Each node $v$ has a Boolean state and
+a local function $f_v$
 whose inputs are the current state of $v$ and those its neighbors;
 the output of $f_v$ is the next state of $v$.
 The vector consisting of the state values of all the nodes at each time instant
@@ -25,60 +25,62 @@ In each time step, all nodes of a SyDS compute and update their
 states \emph{synchronously}.
 Starting from a (given) initial configuration,
 the time evolution of a SyDS consists of a
-sequence of successive configurations.
+sequence of successive configurations, which is also called a
+\textbf{trajectory}.
 
 In this paper, we examine questions related to the evolution
-of configurations that are \emph{similar}, where the notion of similarity
-is measured by the Hamming distance (i.e., the number of positions
+of configurations that are \emph{similar}. 
+We measure the degree of similarity between two configurations
+by their Hamming distance (i.e., the number of positions
 where the two configurations differ). 
-The goal is to obtain an
-understanding of when such configurations may evolve along 
+Thus, the smaller the Hamming distance between two configurations, 
+the larger is the degree of similarity between them. 
+The goal of our study is to obtain an
+understanding of when similar configurations may evolve along 
 similar trajectories.
-To formulate a concrete version of this question, we consider
-two similar configurations and
-investigate questions regarding the similarity of 
-their \emph{predecessor} configurations (i.e., configurations that
-just preceded the given configurations in the time evolution of the system).
-We study problems regarding the similarity of predecessor configurations
-both analytically and experimentally. 
+As a concrete and simplified version of 
+this general research question, we consider the
+following problem: given two similar configurations, how similar are
+their \emph{predecessors} (i.e., configurations that
+just preceded the given configurations in 
+the time evolution of the system)?
+We study this problem both analytically and experimentally. 
 Our results are summarized below.
 
-\smallskip
+%\smallskip
 
 \noindent
 \textbf{Summary of Results.}~ 
 Our theoretical results show that SyDSs may exhibit
 extreme behaviors with respect to the evolution of configurations.
-One of our results shows that there are SyDSs in which
+For example, one of our results shows that there are SyDSs in which
 for any two configurations \calcone{} and \calctwo{} 
 which differ in $h$ bits, there are respective predecessors 
 $\calcone'$ and $\calctwo'$ which also differ in exactly $h$ bits.
-On the other hand, we also present examples of SyDSs in which
+On the other hand, we present examples of SyDSs in which
 highly dissimilar configurations (i.e., configurations that differ
-in all the $n$ bits) have predecessors that are very similar (i.e., they
+in all the bits) have predecessors that are very similar (i.e., they
 differ in just one bit).
 Likewise, we construct examples of SyDSs where two very similar 
 configurations have highly dissimilar predecessors.
-These examples point out that SyDSs may exhibit high sensitivity
+These examples point out that SyDSs may exhibit high level of sensitivity
 with respect to initial conditions (i.e., starting configurations).
 We also consider the problem of computing similarity
-measures of predecessors of given configurations and show that
+measures of the predecessors of two given configurations and show that
 the problem is, in general, computationally intractable.
 
-Our experimental results are based on using public domain Satisfiability
-(SAT) solvers \cite{sat-live}.
+Our experimental results are based on using public domain Boolean Satisfiability
+(SAT) solvers (e.g., \cite{sat-live}).
 We illustrate how the problem of computing predecessors of a
 configuration can be expressed as an instance of the SAT
 problem \cite{GJ-1979}.
 Our experiments consider restricted classes of graphs and local functions.
 \textcolor{red}{(More to be added after we have the experimental results.)}
 
-
-
 \smallskip
 
 \noindent
-\textbf{Related Work.}~ \textcolor{red}{(To be revised)}
+\textbf{Related Work.}~ %%\textcolor{red}{(To be revised)}
 Computational problems associated with 
 discrete dynamical systems 
 have been addressed by many researchers.
@@ -90,22 +92,25 @@ permutation.
 %% They established computational intractability results
 %% for the general case and obtained polynomial time algorithms when
 %% local transition functions are limited to certain Boolean functions.
-Bounds on the lengths of transients and cycles in restricted versions
+Bounds on the lengths of configuration cycles and transients 
+(i.e., trajectories that end in configuration cycles) in restricted versions
 of dynamical systems under the sequential update model are established
 in \cite{MR-2007}.  
 %% Wooldridge \cite{Woo-2002} presents a discussion
 %% of complexity results for multi-agent systems.  
-Tosic \cite{Tos-2010,Tosic-2017} presented results for fixed point enumeration
-problems for systems with special forms of local transition
-functions.  Kosub and Homan \cite{KH-2007} presented dichotomy
+Tosic \cite{Tos-2010,Tosic-2017} presented results for counting
+the number of fixed points\footnote{A fixed point of a graph dynamical
+system is a configuration in which no state changes occur.}
+for systems with special forms of local functions.
+Kosub and Homan \cite{KH-2007} presented dichotomy
 results that delineate computationally intractable and efficiently
 solvable versions of counting fixed points, based on the class of
-allowable local transition functions.  
-Reference \cite{BH+07} considered the complexity
-of the predecessor existence problem for various classes
-of underlying graphs and local functions.
+allowable local functions.  
+The complexity of the predecessor existence problem 
+for various classes of underlying graphs and local functions is 
+investigated in \cite{BH+07}.
 A more general version of the predecessor existence problem,
-where the goal is to find $t$-predecessors for values of $t \geq 2$
+where the goal is to find $t$-step predecessors for values of $t \geq 2$
 has been studied in \cite{Kawachi-et-al-2017,MR+2018}.
 %% for various restricted graph structures (e.g., grid graphs) and for
 %% various restricted families of local transition functions
