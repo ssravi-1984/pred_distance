@@ -9,9 +9,9 @@ Throughout this section, the reader should bear in mind that
 for any configuration \calc, \predset{\calc}{}
 denotes the set of all predecessors of \calc.
 
-Our first result shows that there are SyDSs such that 
-when a pair of distinct configurations is $h$-close, then 
-any pair of their predecessors is also $h$-close.
+Our first result uses the simple observation that if every local function of a SyDS
+is the identity function,
+then the Hamming distance between  configurations is preserved by the successor function.
 
 %% The second result shows that there are SyDSs such that 
 %% there is a pair of distinct configurations that is $1$-close, but 
@@ -21,26 +21,28 @@ any pair of their predecessors is also $h$-close.
 
 
 \begin{proposition}\label{pro:close-close}
-For all integers $n$ and $h$, where $n \geq 1$ and $1 \leq h \leq n$,
-there is a SyDS $\cals_1${} with $n$
-nodes satisfying both of the following properties: 
-(i) every configuration has a predecessor and (ii) 
+Let $G$ be an arbitrary graph.
+Then, there is a SyDS $\cals${} with underlying graph $G$,
+such that $\cals${} has the following properties: 
+(i) every configuration has a predecessor, and (ii) 
 for any pair of distinct configurations
-\calcone{} and \calctwo{} that are $h$-close, 
-$\maxsep\left( \predset{\calcone},~ \predset{\calctwo} \right)$ ~=~ $h$.
+\calcone{} and \calctwo{},
+$\calh(\successor{\calcone}, \successor{\calctwo)} = \calh(\calcone, \calctwo)$,
+and $\maxsep\left( \predset{\calcone},~ \predset{\calctwo} \right)
+  =  \calh(\calcone, \calctwo)$.
 \end{proposition}
 
 \noindent
-\textbf{Proof:}~ The idea is to construct a SyDS in which each configuration
+\textbf{Proof:}~ The idea is to construct $\cals${} so that each configuration
 is a fixed point.
 Thus, each configuration \calc{} has a \emph{unique} predecessor, namely \calc{} itself.
-As a direct consequence, we have that if configurations \calcone{} and
-\calctwo{} are $h$-close for some integer $h$, $1 \leq h \leq n$,
-then the corresponding predecessors are also $h$-close.
+As a direct consequence, if configurations \calcone{} and
+\calctwo{} are $h$-close,
+then their corresponding successors and predecessors are also $h$-close.
 
-Such a SyDS $\cals_1${} can be constructed as follows.
-The underlying graph $G(V,E)$ has $n$ nodes and the set of edges is arbitrary.
-For each node $v \in V$, the local function is the \emph{identity} function.
+Such a SyDS $\cals${} can be constructed as follows.
+The underlying graph of $\cals${}  is the given graph $G$.
+For each node $v$, the local function is the \emph{identity} function.
 In other words, the value of local function $f_v$ is the 
 current state value of $v$, regardless of the state values of 
 the other nodes in the closed neighborhood of $v$.
@@ -53,23 +55,23 @@ their predecessors are highly dissimilar; that is, they have
 the maximum possible Hamming distance.
 
 \begin{proposition}\label{pro:close-far}
-For any integer $n \geq 2$,
-there is a SyDS $\cals_2${} with $n$
-nodes satisfying both of the following properties: 
+Let $G$ be an arbitrary connected graph, 
+and let $n$ be the number of nodes in $G$.
+Then, there is a SyDS $\cals${} with underlying graph $G$,
+such that $\cals${} has the following properties: 
 (i) every configuration has a predecessor, 
-(ii) every local function is 2-symmetric and
+(ii) every local function is linear and
 (iii) for every configuration
 \calcone, there is a configuration \calctwo{} such that 
-\calcone{} and \calctwo{} are $1$-close but 
+$\calh(\calcone, \calctwo) = 1$ and 
 $\minsep\left( \predset{\calcone},~ \predset{\calctwo} \right)$ ~=~ $n$.
 \end{proposition}
 
 \noindent
 \textbf{Proof:} 
-Let $G$ be any \emph{connected} graph on $n$ nodes.
-We will construct a SyDS $\cals_2${} with $G$ as its  underlying graph.
-
-Before constructing $S$, we first construct a  spanning tree for $G$.
+The underlying graph of $\cals${}  is the given graph $G$.
+Before constructing the local functions of $\cals${}, 
+we first construct a  spanning tree for $G$.
 Then we choose any node $w$ of G, and call this node the {\em root node}.
 For every other node $v$,
 we consider the spanning tree neighbor of $v$ 
@@ -81,27 +83,25 @@ we let $K(v)$ denote the set of nodes along
 the spanning tree path between the root node and $v$.
 Note that $K(v)$ includes the endpoints of this path.
 
-We now specify the local functions of $\cals_2$.
+We now specify the local functions of $\cals${}.
 The local function of the root node $w$ is the \emph{identity} function;
 that is, the value of the local function is the current state value of $w$.
 For any other node $v$ the local transition function of $v$ is $v \oplus k(v)$, that is,
 the exclusive-or of $v$ and its key neighbor.
-This completes the construction of $\cals_2$.
+This completes the construction of $\cals${}.
 
-For any configuration \calc{} and  node $u$, 
-we let $\calc(u)$ denote the value of $u$ in \calc.
-Also, for a set of nodes  $X$,
+For any configuration \calc{} and nonempty set of nodes  $X$,
 we let $\hat{\calc}(X)$ denote the exclusive-or of $\calc(u)$ 
-over the multiset of values  $\{\calc(u) | u \in X\}$.
+over the multiset of values  $\{\calc(u) | \, u \in X\}$.
 
 Consider any configuration \calc.
 Let \calcp{} be the configuration where for each node $v$, 
 $\calcp(v) = \hat{\calc}(K(v))$.
 Let $\calc''$ be the successor of \calcp.
 If $v$ is the root node, then $K(v) = \{v\}$, so $\calcp(v) = \calc(v)$.
-Since the local function for the key node is the identity function,
+Since the local function for the root node is the identity function,
 $\calc''(v) = \calc(v)$.
-If $v$ is not the key node, then from the local function for $v$,
+If $v$ is not the root node, then from the local function for $v$,
 $\calc''(v) = \calcp(v)  \oplus \calcp(k(v))$.
 From the construction of \calcp, note that
 $\calcp(v) = \hat{\calc}(K(v))$ and $\calcp(k(v))$ =  
@@ -112,7 +112,7 @@ Hence, $\calc''(v)$ = $\hat{\calc}(K(k(v))) \oplus \calc(v) \oplus  \hat{\calc}(
 = $\calc(v)$.
 Consequently, \calcp{} is a predecessor of \calc.
 
-Since each configuration of $\cals_2$ has a predecessor, 
+Since each configuration of $\cals${}  has a predecessor, 
 and each configuration has exactly one successor,
 each configuration has a unique predecessor.
 
@@ -134,66 +134,141 @@ in the value of the root node, and no other node.
 Thus, $\calcone'(v)$ and $\calctwo'(v)$ have complementary values. \QED
 
 \smallskip
-
-%%
-\begin{wrapfigure}[9]{l}{0.35\textwidth}
-\centering
-\input{star_graph.pdf_t}
-\caption{\small{Star graph used in the proof of
-Proposition~\ref{pro:far-close}.}}
-\label{fig:star-graph}
-\smallskip
-\end{wrapfigure}
-%%
 We now show the existence of SyDSs in which there 
 are pairs of configurations which have the maximum level 
 of dissimilarity but their predecessors are 1-close. 
 
-\begin{proposition}\label{pro:far-close}
-For any integer $n \geq 3$,
-there is a SyDS $\cals_3${} with $n$
-nodes satisfying both of the following properties: 
-(i) there is a pair of configurations
-\calcone{} and \calctwo{} with $\calh(\calcone, \calctwo) = n$  and 
-(ii) $\maxsep\left( \predset{\calcone},~ \predset{\calctwo} \right)$ ~=~ $1$.
+\begin{proposition}\label{pro:far-close-degree}
+Let $G$ be an arbitrary graph, 
+and let $\Delta$ be the the maximum node degree of $G$.
+Then, there is a SyDS $\cals${} with underlying graph $G$,
+such that $\cals${} has the following properties: 
+(i) every configuration has a predecessor, 
+(ii) every local function is linear and
+(iii) for every configuration
+\calcone{}, there is a configuration \calctwo{} such that 
+ $\calh(\calcone, \calctwo) = \Delta + 1$  and 
+$\maxsep\left( \predset{\calcone},~ \predset{\calctwo} \right)$ ~=~ $1$.
 \end{proposition}
 
 \noindent
-\textbf{Proof:}~ The underlying graph of the SyDS $\cals_3$ is
-the star graph on $n$ nodes shown in Figure~\ref{fig:star-graph}.
-The local function at the root node $v_1$ is the \emph{identity}
-function.
-For each node $v_i$, where $2 \leq i \leq n$, the local function
-$f_i$ is the exclusive or of the state of $v_i$ and that of $v_1$.  
-This completes the specification of $\cals_3$.
+\textbf{Proof:}~ 
+The underlying graph of $\cals${}  is the given graph $G$.
+We select a node $v_1$ of $G$ with node degree $\Delta$.
+Let $V_1$ denote the node set consisting of $v_1$ and all nodes that are not neighbors of $v_1$.
+Let $V_2$ denote the remaining set of nodes, i.e. the $\Delta$ neighbors of $v_1$.
 
-Let \calcone{} be the configuration where each node is in state 1.
-Similarly, let \calctwo{} be the configuration where each node is in state 0.
-Thus, $\calh(\calcone, \calctwo) ~=~ n$.
-It can be verified that the configuration
-$\calcone'$, 
-where the state of $v_1$ is 1 and the states of all other
-nodes are 0 is a predecessor of \calcone.
-We claim that $\calcone'$ is the \emph{only} predecessor of \calcone.
-To see this, note that  in any predecessor of \calcone, 
-the state of node $v_1$ must be 1
-since the local function at $v_1$ is the 
-identity function and $\calcone(v_1) = 1$.
-Now, for any node $v_i$, $2 \leq i \leq n$, 
-suppose the state of $v_i$ in the predecessor is 1. 
-Then, since the local function at $v_i$ is the exclusive or of the states of $v_1$
-and $v_i$, the next state of $v_i$ will be 0 where as \calcone{} specifies
-the state of $v_i$ as 1. 
-Therefore, in any predecessor, for $2 \leq i \leq n$, the state of $v_i$ must be 0.
-Hence, \calcone{} has a \emph{unique} predecessor, namely $\calcone'$.
-In a similar manner, it can be seen that \calctwo{} has a unique predecessor 
-$\calctwo'$, which is \calctwo{} itself.
-Thus, $\calh(\calcone', \calctwo') ~=~ 1$.
-Since the predecessors of \calcone{} and \calctwo{} are unique,
-it follows that $\maxsep(\Pi(\calcone), \Pi(\calctwo)) = 1$, as indicated
-in the statement of Proposition~\ref{pro:far-close}. \QED
+We make the local transition function of nodes in $V_1$ be the identity function.  
+We make the local transition function of each node $u$ in $V_2$ 
+be the exclusive or of $u$ and $v_1$.
+This completes the construction of $\cals${}.
+
+Let \calcone{} be an arbitrary configuration of $\cals${}.
+Let \calctwo{} be the configuration such that nodes $v_1$ and its $\Delta$ neighbors
+have the complements of their values in \calcone{},
+and all other nodes have the same value as in \calcone{}.
+Thus, $\calh(\calcone, \calctwo) = \Delta + 1$.
+At this point, we can assume wlog that $\calcone(v_1) = 0$ and $\calctwo(v_1) = 1$.
+
+
+It can be seen that \calcone{} is a fixed point of $\cals${},
+so \calcone{} is a predecessor of itself.
+Let $\calcone' = \calcone$.
+Let $\calctwo'$ be identical to $\calcone'{}$, except that $\calctwo(v_1) = 1$.
+Thus, $\calh(\calcone', \calctwo') =1$.
+It can be seen that the successor of $\calctwo'$ is \calctwo{},
+so $\calctwo'$ is a predecessor of \calctwo{}.
+Thus, $\maxsep\left( \predset{\calcone},~ \predset{\calctwo} \right)$ ~=~ $1$.
+
+Observe that we have also shown that every configuration has a predecessor.
+\QED
+
+
+%%
+%% \begin{wrapfigure}[9]{l}{0.35\textwidth}
+%% \centering
+%% \input{star_graph.pdf_t}
+%% \caption{\small{Star graph used in the proof of
+%% Proposition~\ref{pro:far-close}.}}
+%% \label{fig:star-graph}
+%% \smallskip
+%% \end{wrapfigure}
+%%
+
+\smallskip
+
+\begin{proposition}\label{pro:far-close}
+For any integer $n \geq 2$,
+there is a SyDS $\cals${} with $n$
+nodes satisfying the following properties: 
+(i) there is a pair of configurations
+\calcone{} and \calctwo{} with $\calh(\calcone, \calctwo) = n$  and 
+$\maxsep\left( \predset{\calcone},~ \predset{\calctwo} \right)$ ~=~ $1$.
+\end{proposition}
+
+\noindent
+\textbf{Proof:}~ 
+Let $G$ be the star graph on $n$ nodes.
+%% as shown in Figure~\ref{fig:star-graph}.
+The result follows from Proposition \ref{pro:far-close-degree}.
+\QED
+
+
+%%
+%% The underlying graph of the SyDS $\cals_3$ is
+%% the star graph on $n$ nodes shown in Figure~\ref{fig:star-graph}.
+%% The local function at the root node $v_1$ is the \emph{identity}
+%% function.
+%% For each node $v_i$, where $2 \leq i \leq n$, the local function
+%% $f_i$ is the exclusive or of the state of $v_i$ and that of $v_1$.  
+%% This completes the specification of $\cals_3$.
+
+%% Let \calcone{} be the configuration where each node is in state 1.
+%% Similarly, let \calctwo{} be the configuration where each node is in state 0.
+%% Thus, $\calh(\calcone, \calctwo) ~=~ n$.
+%% It can be verified that the configuration $\calcone'$, 
+%% where the state of $v_1$ is 1 and the states of all other
+%% nodes are 0 is a predecessor of \calcone.
+%% We claim that $\calcone'$ is the \emph{only} predecessor of \calcone.
+%% To see this, note that  in any predecessor of \calcone, 
+%% the state of node $v_1$ must be 1
+%% since the local function at $v_1$ is the 
+%% identity function and $\calcone(v_1) = 1$.
+%% Now, for any node $v_i$, $2 \leq i \leq n$, 
+%% suppose the state of $v_i$ in the predecessor is 1. 
+%% Then, since the local function at $v_i$ is the exclusive or of the states of $v_1$
+%% and $v_i$, the next state of $v_i$ will be 0 where as \calcone{} specifies
+%% the state of $v_i$ as 1. 
+%% Therefore, in any predecessor, for $2 \leq i \leq n$, the state of $v_i$ must be 0.
+%% Hence, \calcone{} has a \emph{unique} predecessor, namely $\calcone'$.
+%% In a similar manner, it can be seen that \calctwo{} has a unique predecessor 
+%% $\calctwo'$, which is \calctwo{} itself.
+%% Thus, $\calh(\calcone', \calctwo') ~=~ 1$.
+%% Since the predecessors of \calcone{} and \calctwo{} are unique,
+%% it follows that $\maxsep(\Pi(\calcone), \Pi(\calctwo)) = 1$, as indicated
+%% in the statement of Proposition~\ref{pro:far-close}. \QED
+
+\smallskip
+
+\begin{proposition}\label{pro:far-close-lower-bound}
+Suppose that for a given SyDS $\cals${},
+the maximum node degree of the underlying graph is $\Delta$.
+ Then, for any pair of configurations
+\calcone{} and \calctwo{},
+ $\calh(\Sigma(\calcone), \Sigma(\calctwo)) \leq (\Delta+1) \calh(\calcone, \calctwo)$.\end{proposition}
+
+\noindent
+\textbf{Proof:}~ 
+The value of a given node in a configuration can only affect the values of at most $\Delta +1$
+nodes in the successor of that configuration.
+\QED
+
+
+
+
 
 \newcommand{\mps}{\mbox{MPS}}
+\newcommand{\mpsgp}{\mbox{MPSGP}}
 \newcommand{\pre}{\mbox{PRE}}
 
 \smallskip
@@ -201,8 +276,8 @@ in the statement of Proposition~\ref{pro:far-close}. \QED
 Finally, we present a simple result that establishes the computational complexity
 of computing distance measures for predecessor configurations.
 The decision problem, which we call \textbf{Minimum Predecessor Separation} (\mps),
-is the following: given a SyDS \cals{} with $n$ nodes, two configurations \calcone,{}
-\calctwo{} and a positive integer $q$, is the value of
+is the following: given a SyDS \cals{}, two configurations $\calcone{}$ and
+$\calctwo{}$, and a positive integer $q$, is the value of
 $\minsep(\Pi(\calcone), \Pi(\calctwo))$ at most $q$?
 We have the following result.
 
@@ -216,7 +291,7 @@ To prove \cnp-hardness,
 we use a reduction from the 
 \textbf{Predecessor Existence} (\pre) problem: given a SyDS \cals{} and
 a configuration \calc, does \calc{} have a predecessor?
-The \pre{} problem was shown to be \cnp-hard in \cite{BH+07}
+The \pre{} problem was shown to be \cnp-hard in \cite{BH+07},
 even for SyDSs in which each node computes the 2-threshold function.
 We will use this problem in our reduction.
 
@@ -234,13 +309,13 @@ The configuration \calctwo{} of the \mps{} is the same as the configuration
 \calc{} specified in the \pre{} instance.
 (In configuration \calc, some nodes have the value 1. So,
 \calc{} which is the same as \calctwo, is different from \calcone.)
-\item We set $q = n$, the number of nodes in \cals.
+\item Let $n$ be the number of nodes in \cals. We set $q = n$.
 \end{enumerate}
 This completes the reduction. It can be seen that the reduction
 can be carried out in polynomial time.
 
 Suppose the \pre{} problem instance has a solution.
-Let $\calcp'$ be a predecessor of \calc.
+Let $\calcp$ be a predecessor of \calc.
 Since each local function of \cals{} is the 2-threshold function,
 configuration \calcone{} (where each node is in state 0) is a fixed point.
 Thus, $\Pi(\calcone)$ is nonempty; it includes \calcone.
@@ -256,5 +331,109 @@ it follows that both
 $\Pi(\calcone)$ and $\Pi(\calctwo))$ are nonempty. 
 In other words, the configuration \calctwo{} = \calc{}
 has a predecessor; that is, the \pre{} instance has a solution.
-This completes the proof of Proposition~\ref{pro:minsep-hard}. \QED
+This completes the proof of Proposition~\ref{pro:minsep-hard}. 
+\QED
 
+We now show that the MDS problem is \cnp-complete
+even when given predecessors of \calcone{} and \calctwo{}.
+We call the decision problem when this extra information is given
+\textbf{Minimum Predecessor Separation Given Predecessors} (\mpsgp).
+Note that since the predecessors of \calcone{} and \calctwo{}
+are specified in a given \mpsgp{} problem instance, 
+it is unnecessarily to explicitly specify \calcone{} and \calctwo{}.
+Thus, we formalize the \mpsgp{} problem as follows:
+ given a SyDS \cals{}, and two configurations $\calcone{} '$ and $\calctwo{}'$,
+is 
+$\minsep(\Pi(\Sigma(\calcone')), \Pi(\Sigma(\calctwo'))) < \calh(\calcone', \calctwo')$?
+
+\begin{proposition}\label{pro:minsep-gp-hard}
+The \mpsgp{} problem is \cnp-complete.
+\end{proposition}
+
+\noindent
+\textbf{Proof:}~ 
+ It can be seen that \mpsgp{} is in \cnp.
+To prove \cnp-hardness,
+we use a reduction from 3SAT.
+Suppose the given 3SAT problem instance $\psi$ involves $n$ variables and $m$ clauses.
+We can assume wlog that $m \geq 2$.
+The  \mpsgp{} problem instance is constructed as follows.
+\begin{enumerate}
+\item The underlying graph of SyDS \cals{} has $n+m+1$ nodes: a central node $z$,
+a node $v_i$ for each variable of $\psi$,
+and a node $c_j$ for each clause of $\psi$.
+\item The underlying graph of SyDS \cals{} 
+has an edge between $z$ and every other node,
+and an edge between each clause node $c_j$ 
+and the nodes for the variables occurring in that clause.
+\item The local function for node $z$ is 
+the OR of $z$ and the AND of the complements of all the clause nodes.
+\item The local function for a variable node $v_i$, $1 \leq i \leq n$, is 
+ $z \vee \overline{v_i}$.
+\item The local function for a clause node $c_j$, $1 \leq j \leq m$, is 
+ the function that is 1 iff either $z$ and $c_j$ are both 1
+  and the values of the variable nodes adjacent to node $c_j$
+ satisfy clause $c_j$ of $\psi$,
+ or $z$ and $c_j$ are both 0.
+\item We set configuration $\calcone{}'$ of the \mpsgp{} to be the one in which
+every node has value 0.
+\item We set configuration $\calctwo{}'$ of the \mpsgp{} to be the one in which
+node $z$ has value 0 and every other node has value 1.
+\end{enumerate}
+
+This completes the reduction. It can be seen that the reduction
+can be carried out in polynomial time.
+Also note that if in a given configuration node $z$ has value 0, 
+then all the nodes for the variables and clauses 
+are complemented in the successor configuration.
+
+Given the constructed \mpsgp{} problem instance,
+let $\calcone = \Sigma(\calcone')$, and $\calctwo = \Sigma(\calctwo')$.
+Note that in \calcone{} all nodes have value 1,
+and in \calctwo{} all nodes have value 0.
+Also, note that \calctwo{} is identical to $\calcone{}'$.
+
+Suppose that $\psi$ is satisfiable.
+Let $\alpha$ be a satisfying assignment.
+Let $\calc_{\alpha}$ be the configuration of  \cals{}
+where node $z$ has the value 1,
+the variable nodes have the same values as in $\alpha$,
+and the clause nodes all have value 1.
+It can be seen that $\Sigma(\calc_{\alpha})$ is \calcone{},
+so $\calc_{\alpha}$ is a predecessor of \calcone{}.
+Note that $\calh(\calcone', \calctwo') = n+m$.
+Also, note that in $\calc_{\alpha}$, at least two nodes have value 1.
+Thus $\calh(\calc_{\alpha}, \calctwo') < n+m  = \calh(\calcone', \calctwo')$.
+Consequently, 
+$\minsep(\calcone, \calctwo) < \calh(\calcone', \calctwo')$,
+so the answer to the constructed \mpsgp{} instance is YES.
+
+Now suppose that the answer to the constructed \mpsgp{} instance is YES.
+
+Let $\calctwo''$ be a predecessor of \calctwo{}.
+Since $\calctwo(z) = 0$, the local function of node $z$ requires that 
+$\calctwo''(z) = 0$.
+The local function of every other node then requires that 
+every other node has value 1 in  $\calctwo''$.
+Thus,  $\calctwo'' = \calctwo'$,
+so $\calctwo'$ is the only predecessor of $\calctwo$.
+Since the answer to the constructed \mpsgp{} instance is YES,
+there is  a predecessor $\calcone''$ of \calcone{} such that
+$\calh(\calcone'', \calctwo') < \calh(\calcone', \calctwo')$.
+
+
+Recall that in \calcone{}, all nodes have value 1.
+From the local transition functions of \cals{}, 
+the only predecessor of \calcone{} for which node $z$ has value 0 is $\calcone{}'$.
+Thus, predecessor $\calcone''$ of \calcone{}
+must have $\calcone''(z) = 1$.
+Consider a given clause node, say $c_j$.
+Since $\calcone(c_j) = 1$ and $\calcone''(z) = 1$,
+the transition function for node $c_j$ requires that
+the values of the variable nodes in $\calcone''$ satisfy clause $c_j$.
+Since this requirement holds for each clause node,
+the values of the variable nodes in $\calcone''$ satisfy $\psi$.
+
+Thus $\psi$ is satisfiable iff the answer to the constructed \mpsgp{} instance is YES.
+This completes the proof of the reduction.
+\QED

@@ -50,6 +50,12 @@ or more predecessors.
 In the graph dynamical systems literature, configurations with 
 no predecessors are called \textbf{Garden of Eden}
 (GE) configurations \cite{MR-2007}.
+Given a configuration \calc{}, 
+we use the notation 
+\successor{\calc}{}
+to denote the successor of \calc,
+and \predset{\calc}{}
+to denote the set of all predecessors of \calc.
 
 
 %%
@@ -126,6 +132,11 @@ where $r$ is a \emph{fixed} integer.
 %% We say that a \underline{SyDS is $r$-symmetric}
 %% if each of its local functions is $r'$-symmetric 
 %% for some $r' \leq r$.
+A Boolean function $f$ is \textbf{linear} if it can be expressed as a linear equation,
+i.e., as the exclusive-or of a constant (possibly 0) 
+and a subset (not necessarily proper) of its variables.
+Note that every linear function is 2-symmetric.
+
 
 \smallskip
 
@@ -203,8 +214,6 @@ $\maxsep(S_1, S_2)$ and $\avgsep(S_1, S_2)$ to be $\infty$.
 
 \smallskip
 
-Given a configuration \calc{} of a SyDS, we use the notation \predset{\calc}{}
-to denote the set of all predecessors of \calc.
 The following lemma points out a simple property of predecessor sets
 of SyDSs.
 
